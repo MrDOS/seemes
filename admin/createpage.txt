@@ -1,0 +1,46 @@
+<h2>Create page</h2>
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: createpage.txt
+Description: Admin Control Panel module; create a new page.
+
+*/
+
+?>
+<p>Page listing:</p>
+<pre>
+<?php listpages($websitedatadir, false, ""); ?>
+</pre>
+<form action="action.php" method="post">
+<fieldset>
+<input type="hidden" name="action" value="createpage" />
+<label for="pagefilename">Page filename (alphanumeric only, no file extention):</label><br />
+<input type="text" name="pagefilename" id="pagefilename" style="width: 400px;" /><br />
+<label for="pagename">Page name:</label><br />
+<input type="text" name="pagename" id="pagename" style="width: 400px;" /><br />
+<label for="content">Content:</label><br />
+<textarea name="content" id="content" cols="60" rows="15" onkeyup="showPreview('content', 'htmlpreview')"></textarea><br />
+Live preview:<br />
+<div id="htmlpreview" style="border: 1px solid #d0d0d0; background-color: #ffffff; color: #000000;"><p style="color: #c0c0c0;">Your live preview will appear here, if you have JavaScript enabled.</p></div>
+</fieldset>
+<fieldset>
+<label for="headextra">Extra header (optional):</label><br />
+<textarea name="headextra" id="headextra" cols="60" rows="5"></textarea><br />
+<label for="bodyextra">Extra <code>&lt;body&gt;</code> tag content (<code>onload</code>, etc.) (optional):</label><br />
+<input type="text" name="bodyextra" id="bodyextra" style="width: 400px;" /><br />
+</fieldset>
+<fieldset>
+<input type="radio" name="menutype" value="normal" id="normal" checked="checked" /><label for="normal">Add page to menu (default)</label><br />
+<input type="radio" name="menutype" value="nomenu" id="nomenu" /><label for="nomenu">Don't add page to menu</label><br />
+<input type="radio" name="menutype" value="bullet" id="bullet" /><label for="bullet">Add page to menu as a bullet</label><br />
+</fieldset>
+<fieldset>
+<input type="submit" value="Create page" />
+</fieldset>
+</form>

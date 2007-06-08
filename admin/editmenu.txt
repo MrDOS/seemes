@@ -1,0 +1,49 @@
+<h2>Edit menu</h2>
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: editmenu.txt
+Description: Admin Control Panel module; edit the menu.
+
+*/
+
+// Get the website menu.
+   
+// First, make sure that the menu variable is blank.
+$menucontent = "";
+   
+// Check that the file exists...
+if (file_exists($websitedatadir . "menu.inc")) {
+   // If it does, open and read the file.
+   $file = fopen($websitedatadir . "menu.inc", "r");
+   while (!feof($file)) {
+      $menucontent = $menucontent . trim(fgets($file)) . "\n";
+   }
+   fclose($file);
+   // Trim off the menu.
+   $menucontent = trim($menucontent);
+}
+else {
+   // If it doesn't, return an error.
+   $menucontent = "Menu file could not be found!";
+}
+
+?>
+<form action="action.php" method="post">
+<fieldset>
+<input type="hidden" name="action" value="editmenu" />
+<textarea name="content" cols="60" rows="15"><?php echo($menucontent); ?></textarea><br />
+<input type="submit" value="Edit menu" />
+</fieldset>
+</form>
+<p>Tips:</p>
+<ul>
+<li>Putting <code>((</code> in front of an item will remove it from the menu. (However, don't use this as a way of shielding a page from the public, the raw menu data will still be avaliable. To make it totally hidden, just remove the entry.)</li>
+<li>Putting <code>**</code> in front of an item will display it with a bullet (&bull;) in front of it.</li>
+<li>Putting <code>!!</code> in front of an item will make an absolute link, i.e. <code>!!http://mysite.com</code> would link to <code>http://mysite.com</code> and not <code>http://mysite.com/index.php?page=http://mysite.com</code>. To describe the link in the menu, separate the URL from the name with another <code>!!</code>, i.e. <code>!!http://mysite.com!!My Site</code> would display as <b>My Site</b> in the menu.</li>
+</ul>

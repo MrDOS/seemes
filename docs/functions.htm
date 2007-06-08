@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<!--
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: functions.htm
+Description: Seemes CMS documentation; built-in functions reference.
+
+-->
+<title>Seemes 0.2 Beta 2 - Documentation - System Functions</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
+</head>
+<body>
+<h1>Seemes 0.2 Beta 2 - Documentation</h1>
+<h2>System Functions</h2>
+<hr />
+<h4>Introduction</h4>
+<p>This document provides an overview of the functions found in <code>functions.php</code>, including an overview of what each one does and its syntax.</p>
+<p><i>Please note:</i> This will probably only be useful to those who are tring to mod Seemes or just figure out how it works. If you don't fit into one of the above categories, this will probably put you to sleep.</p>
+<hr />
+<h4>The functions</h4>
+<p>Functions are listed in alphabetical order.</p>
+<ul>
+<li><a href="#getextra">getetra</a></li>
+<li><a href="#getmenu">getmenu</a></li>
+<li><a href="#getpage">getpage</a></li>
+<li><a href="#getpagename">getpagename</a></li>
+<li><a href="#listfiles">listfiles</a></li>
+<li><a href="#listpages">listpages</a></li>
+<li><a href="#makesafe">makesafe</a></li>
+<li><a href="#timerreturn">timerreturn</a></li>
+</ul>
+<hr />
+<div style="margin-left: 4em;">
+<h4 class="functionname"><a name="getextra">getextra</a></h4>
+<p><b>Syntax:</b> <code><span style="color: #ff0000;">getextra</span>(<span style="color: #0060c0;">$page</span>, <span style="color: #0060c0;">$datadir</span>);</code><br />
+<b>Returns:</b> array (2 items)</p>
+<p><b>Purpose:</b> Finds (and returns) extra page content (extra stuff to go in <code>&lt;head&gt;</code>, e.g. scripts and stuff that actually goes inside of the <code>&lt;body&gt;</code> tag for things such as <code>&lt;onload()&gt;</code>).</p>
+<hr />
+<h4 class="functionname"><a name="getmenu">getmenu</a></h4>
+<p><b>Syntax:</b> <code><span style="color: #ff0000;">getmenu</span>(<span style="color: #0060c0;">$datadir</span>, <span style="color: #0060c0;">$phpfile</span>);</code><br />
+<b>Returns:</b> string</p>
+<p><b>Purpose:</b> Finds the menu file in any given directory and parses the menu for said directory. ($phpfile is the PHP file to use in the link.). Returns the formatted items in a single string.</p>
+<hr />
+<h4 class="functionname"><a name="getpage">getpage</a></h4>
+<p><b>Syntax:</b> <code><span style="color: #ff0000;">getpage</span>(<span style="color: #0060c0;">$page</span>, <span style="color: #0060c0;">$datadir</span>);</code><br />
+<b>Returns:</b> string</p>
+<p><b>Purpose:</b> Generates a path to a data file relative to <code>index.php</code>. Arguments are the name of the file and the data folder. (Data extension is pulled from <code>config.php</code> automatically.)</p>
+<hr />
+<h4 class="functionname"><a name="getpagename">getpagename</a></h4>
+<p><b>Syntax:</b> <code><span style="color: #ff0000;">getpagename</span>(<span style="color: #0060c0;">$page</span>);</code><br />
+<b>Returns:</b> string</p>
+<p><b>Purpose:</b> Opens a data file and retrieves the page name from the first line of the file (after stripping any HTML tags). Requires a path, not just a filename.</p>
+<hr />
+<h4 class="functionname"><a name="listfiles">listfiles</a></h4>
+<p><b>Syntax:</b> <code><span style="color: #ff0000;">listfiles</span>(<span style="color: #0060c0;">$datadir</span>, <span style="color: #0060c0;">$dropdownlist</span>, <span style="color: #0060c0;">$dropdownid</span>);</code><br />
+<b>Returns:</b> string</p>
+<p><b>Purpose:</b> Lists all files in directory <code>$datadir</code>. If <code>$dropdownlist</code> is true, it will return a <code>&lt;select&gt;</code> element containing the items. <code>$dropdownid</code> is the ID and name to be given the <code>&lt;select&gt;</code>.</p>
+<hr />
+<h4 class="functionname"><a name="listpages">listpages</a></h4>
+<p><b>Syntax:</b> <code><span style="color: #ff0000;">listpages</span>(<span style="color: #0060c0;">$datadir</span>, <span style="color: #0060c0;">$dropdownlist</span>, <span style="color: #0060c0;">$dropdownid</span>);</code><br />
+<b>Returns:</b> string</p>
+<p><b>Purpose:</b> Lists all pages in directory <code>$datadir</code>. If <code>$dropdownlist</code> is true, it will return a <code>&lt;select&gt;</code> element containing the items. <code>$dropdownid</code> is the ID and name to be given the <code>&lt;select&gt;</code>.</p>
+<hr />
+<h4 class="functionname"><a name="makesafe">makesafe</a></h4>
+<p><b>Syntax:</b> <code><span style="color: #ff0000;">makesafe</span>(<span style="color: #0060c0;">$unsafestring</span>, <span style="color: #0060c0;">$removeslashes</span>, <span style="color: #0060c0;">$removeperiods</span>);</code><br />
+<b>Returns:</b> string</p>
+<p><b>Purpose:</b> Makes a given string "safe" by removing special HTML characters (<code>&lt;</code>, <code>&gt;</code>, etc.), any instances of <code>http://</code>, and adding magic slashes (i.e. <code>"</code> and <code>'</code> become <code>/"</code> and <code>/'</code>, respectively). If <code>$removeslashes</code> is <code>true</code>, it will remove any forward slashes (<code>/</code>). If <code>$removeperiods</code> is <code>true</code>, it will remove any periods (<code>.</code>).</p>
+<h4 class="functionname"><a name="timerreturn">timerreturn</a></h4>
+<p><b>Syntax:</b> <code><span style="color: #ff0000;">timerreturn</span>(<span style="color: #0060c0;">$starttime</span>);</code><br />
+<b>Returns:</b> string</p>
+<p><b>Purpose:</b> Returns the amount of time from <code>$starttime</code> to present. This fuction is used internally for measuring page load time. <code>$starttime</code> is also the name of the variable that stores the time when the page is loaded. (It is initialized in <code>index.php</code>, <code>admin.php</code>, <code>action.php</code>, and <code>login.php</code>.) The start time is initialized like this:</p>
+<pre>$currenttime = microtime();
+$currenttime = explode(" ", $currenttime);
+$currenttime = $currenttime[0] + $currenttime[1];
+$starttime = $currenttime;</pre>
+<hr />
+</div>
+<p id="footer"><b>Seemes CMS</b> is copyright 2007 MagicWare, and is released under the GNU General Public Licence 2.0.</p>
+</body>
+</html>

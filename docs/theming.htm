@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<!--
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: theming.htm
+Description: Seemes CMS documentation; theming reference.
+
+-->
+<title>Seemes 0.2 Beta 2 - Documentation - Theming</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
+</head>
+<body>
+<h1>Seemes 0.2 Beta 2 - Documentation</h1>
+<h2>Theming</h2>
+<hr />
+<h4>Introduction</h4>
+<p>This file contains information regarding making a theme for Seemes. Read this if you want to customize the look of your website.</p>
+<hr />
+<h4>Designing your theme</h4>
+<p>Make a space for:</p>
+<ul>
+<li>the header</li>
+<li>the menu</li>
+<li>the main content</li>
+<li>the footer</li>
+</ul>
+<p>The only major limitation is that your main content must come directly after the page title.</p>
+<hr />
+<h4>Fitting things together</h4>
+<p>Go through your style sheet (if any) and change the image paths to <code>../img/<i>yourthemesname</i>/<i>imagename</i></code>.</p>
+<p>Next, rename your HTML file to <code><i>themename</i>.txt</code> and make the following changes:</p>
+<ol>
+<li>The contents of the <code>&lt;title&gt;</code> tag should read:<br />
+<code>&lt;?php echo($websitename); ?&gt; - &lt;?php echo($pagename); ?&gt;</code><br />
+The bit before the hyphen/dash/negative sign is for the website name, the bit after is for the page name. It's safe to reverse the two or cut one out altogether.</li>
+<li>Somewhere in the &lt;head&gt; tag:<br />
+<code>&lt;?php echo($headextra); ?&gt;</code></li>
+<li>And actually inside the brackets of the &lt;body&gt; tag:<br />
+<code>&lt;body&lt;?php echo($bodyextra); ?&gt;&gt;</code></li>
+<li>The header should contain:<br />
+<code>&lt;?php echo($websitename); ?&gt;</code><br />
+(Unless you have a header image, in which case, that would be the image's <code>alt</code> text.)</li>
+<li>The menu*:<br />
+<code>&lt;?php echo($menu); ?&gt;</code></li>
+<li>The content:<br />
+<code>&lt;?php include($page); ?&gt;</code></li>
+<li>And the footer:<br />
+<code>&lt;p&gt;&lt;?php echo($websitecopyright); ?&gt;&lt;/p&gt;<br />
+&lt;p&gt;Powered by &lt;b&gt;Seemes&lt;/b&gt; version &lt;?php echo($seemesversion); ?&gt;&lt;/p&gt;</code></li>
+<li>If you want to include the "page generated in..." line somewhere in your theme, use the following code:<br />
+<code>&lt;?php echo(timerreturn($starttime)); ?&gt;</code><br />
+This inserts the time taken (in seconds) from when the page was called to present. Note that it's a good idea to place this at the very end of your theme file so you can measure how long it took to include the page, not just how long it took to generate the menu, etc.</li>
+</ol>
+<p>And that's it!</p>
+<p>Store all your images in <code>img/<i>yourthemename</i></code> and your theme file and stylesheet in <code>themes</code> and upload the whole mess to your server.</p>
+<p>Now go see <b>Basic Usage</b> for how to install themes.</p>
+<p>* - Please note that at this time there is no way to customize the menu output (short of hacking <code>functions.php</code>) so you'll have to make your stylesheets format the anchors.</p>
+<hr />
+<p id="footer"><b>Seemes CMS</b> is copyright 2007 MagicWare, and is released under the GNU General Public Licence 2.0.</p>
+</body>
+</html>

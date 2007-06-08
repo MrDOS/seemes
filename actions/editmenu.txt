@@ -1,0 +1,26 @@
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: editmenu.txt
+Description: Admin Control Panel action module; menu editor.
+
+*/
+
+?>
+<h2></h2>
+<?php
+
+// Get some POSTed variables.
+$content = trim($_POST["content"]);
+
+$file = fopen($websitedatadir . "menu.inc", "w");
+fwrite($file, $content);
+fclose($file);
+
+?>
+<p>(You will be redirected to the Admin Control Panel automatically. Click <a href="<?php echo($websiteadminindex . ".php?page=" . $action ); ?>">here</a> if you don't want to wait.)</p>

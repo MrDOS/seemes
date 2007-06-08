@@ -1,0 +1,75 @@
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: deletepage.txt
+Description: Admin Control Panel action module; deletes a page.
+
+*/
+
+?>
+<h2>Deleting page...</h2>
+<?php
+
+// Get some POSTed variables.
+$pagefilename = trim($_POST["pagefilename"]);
+
+// Make sure the page filename is not blank.
+if ($pagefilename != "") {
+	// Now correct the page path.
+	$pagefilepath = getpage($pagefilename, $websitedatadir);
+	// Make sure the file exists.
+	if (file_exists($pagefilepath)) {
+		// Now delete the page.
+		$deleted = unlink($pagefilepath);
+		
+		// If there's an extras page, delete that too,
+		if (file_exists($pagefilepath . ".extra")) {
+			unlink($pagefilepath . ".extra");
+		}
+		
+		// And update the menu.
+		// First we read in the existing menu (minus the page to be deleted)...
+		$file = fopen($websitedatadir . "menu.inc", "r");
+		while (!feof($file)) {
+			$currentline = trim(fgets($file));
+			if ($currentline == $pagefilename) {
+			}
+			elseif ($currentline == "((" . $pagefilename) {
+			}
+			elseif ($currentline == "**" . $pagefilename) {
+			}
+			else {
+				$menucontent = $menucontent . $currentline . "\n";
+			}
+		}
+		fclose($file);
+		// Then we write the new menu to the file.
+		$file = fopen($websitedatadir . "menu.inc", "w");
+		fwrite($file, trim($menucontent));
+		fclose($file);
+	}
+	else {
+		// If it doesn't, do nothing.
+		$deleted = false;
+	}
+}
+else {
+	// If it is, do nothing.
+	$deleted = false;
+}
+
+// Now echo status.
+if($deleted == true) {
+	echo($pagefilepath . " was successfully deleted.");
+}
+else {
+	echo($pagefilepath . " could not be deleted!");
+}	
+
+?>
+<p>(You will be redirected to the Admin Control Panel automatically. Click <a href="<?php echo($websiteadminindex . ".php?page=" . $action); ?>">here</a> if you don't want to wait.)</p>

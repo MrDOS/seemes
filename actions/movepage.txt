@@ -1,0 +1,74 @@
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: movepage.txt
+Description: Admin Control Panel action module; move a page.
+
+*/
+
+?>
+<h2>Moving page...</h2>
+<?php
+
+// Get some POSTed variables.
+$currentfilename = trim($_POST["currentfilename"]);
+$newfilename = trim($_POST["newfilename"]);
+
+// Now get the proper paths.
+$currentfilepath = getpage($currentfilename, $websitedatadir);
+$newfilepath = getpage($newfilename, $websitedatadir);
+
+// Make sure the old file exists...
+if (file_exists($currentfilepath)) {
+   // ...and the new one doesn't.
+   if (!file_exists($newfilepath)) {
+      // If it's all OK, move.
+      rename($currentfilepath, $newfilepath);
+      $moved = true;
+      
+      // Now see if the extras exist.
+      if (file_exists($currentfilepath . ".extra")) {
+         rename($currentfilepath . ".extra", $newfilepath . ".extra");
+      }
+      
+      // Now update the menu
+      // First we read in the existing menu (minus the page to be deleted)...
+      $file = fopen($websitedatadir . "menu.inc", "r");
+      while (!feof($file)) {
+         $currentline = trim(fgets($file));
+         if ($currentline != $currentfilename) {
+            $menucontent = $menucontent . $currentline . "\n";
+         }
+         else {
+            $menucontent = $menucontent . $newfilename . "\n";
+         }
+      }
+      fclose($file);
+      // Then we write the new menu to the file.
+      $file = fopen($websitedatadir . "menu.inc", "w");
+      fwrite($file, trim($menucontent));
+      fclose($file);
+   }
+   else {
+      $moved = false;
+   }
+}
+else {
+   $moved = false;
+}
+
+// Now echo the results.
+if ($moved) {
+   echo($currentfilepath . " was successfully moved to " . $newfilepath . ".");
+}
+else {
+   echo($currentfilepath . " could not be moved to " . $newfilepath . ".");
+}
+
+?>
+<p>(You will be redirected to the Admin Control Panel automatically. Click <a href="<?php echo($websiteadminindex . ".php?page=" . $action ); ?>">here</a> if you don't want to wait.)</p>

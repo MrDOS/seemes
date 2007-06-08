@@ -1,0 +1,28 @@
+<h2>Upload file</h2>
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: uploadfile.txt
+Description: Admin Control Panel module; upload a file.
+
+*/
+
+?>
+<p>Uploaded files are placed in the directory <code><?php echo($websiteuploaddir); ?></code>. File listing:</p>
+<pre>
+<?php listfiles($websiteuploaddir, false, ""); ?>
+</pre>
+<form action="action.php" enctype="multipart/form-data" method="post">
+<fieldset>
+<input type="hidden" name="action" value="uploadfile" />
+<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+<label for="filename">File to upload:</label><br />
+<input type="file" name="filename" id="filename" /><br />
+<input type="submit" value="Upload file" />
+</fieldset>
+</form>

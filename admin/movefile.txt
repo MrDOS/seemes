@@ -1,0 +1,26 @@
+<h2>Move file</h2>
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: movefile.txt
+Description: Admin Control Panel module; move a file.
+
+*/
+
+?>
+<p>Uploaded files are placed in the directory <code><?php echo($websiteuploaddir); ?></code>.</p>
+<form action="action.php" method="post">
+<fieldset>
+<input type="hidden" name="action" value="movefile" />
+<label for="currentfilename">Current filename:</label><br />
+<?php listfiles($websiteuploaddir, true, "currentfilename"); ?><br />
+<label for="newfilename">New filename:</label><br />
+<input type="text" name="newfilename" id="newfilename" /><br />
+<input type="submit" value="Move file" />
+</fieldset>
+</form>

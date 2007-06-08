@@ -1,0 +1,17 @@
+<h2>Admin Control Panel</h2>
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: home.txt
+Description: Admin Control Panel home.
+
+*/
+
+?>
+<p>Welcome to the Admin Control Panel. From here you can change, edit, and delete parts of your website.</p>
+<p>Click <a href="<?php echo($websiteindex . ".php?page=" . $websitedefaultpage); ?>">here</a> to go home (or click <a href="<?php echo($websiteindex . ".php?page=" . $websitedefaultpage); ?>" target="_blank">here</a> to open the home page in a new window).</p>

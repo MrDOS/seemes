@@ -1,0 +1,17 @@
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: goodlogin.txt
+Description: Good login attempt.
+
+*/
+
+?>
+<h2>You have been logged in</h2>
+<p>You have now been logged in.</p>
+<p>(You will be redirected to the Admin Control Panel automatically. Click <a href="<?php echo($websiteadminindex . ".php"); ?>">here</a> if you don't want to wait.)</p>

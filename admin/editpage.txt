@@ -1,0 +1,73 @@
+<h2>Edit page</h2>
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: editpage.txt
+Description: Admin Control Panel module; edit a page.
+
+*/
+
+?>
+<form action="admin.php?page=editpage" method="post">
+<fieldset>
+<label for="pagefilename">Page filename:</label><br />
+<?php listpages($websitedatadir, true, "pagefilename"); ?><br />
+<input type="submit" value="Open page" />
+</fieldset>
+</form>
+<?php
+
+// Get the POSTed filename (if any).
+$pagefilename = trim($_POST["pagefilename"]);
+
+// If a page filename has been POSTed, open it for editing.
+if ($pagefilename != "") {
+	// Get the full path for the page
+	$pagefilepath = getpage($pagefilename, $websitedatadir);
+	// Make sure the page exists...
+	if (file_exists($pagefilepath)) {
+		// Now get the page name and content.
+		$file = fopen($pagefilepath, "r");
+		$pagename = trim(fgetss($file, 1024));
+		// Make sure $content is blank.
+		$content = "";
+		while (!feof($file)) {
+			$content = $content . fgets($file);
+		}
+		fclose($file);
+		// Chop any extra whitespace off the page content
+		$content = trim($content);
+		// Replace all /'s with... well, /'s - but the hex value thereof, so </textarea>'s won't end the editing space.
+		$content = str_replace("/", "&#x2F;", $content);
+		// Get the extras
+		$extra = getextra($pagefilepath, $websitedatadir);
+		$bodyextra = trim($extra[0]);
+		$headextra = trim($extra[1]);
+		// Change the "'s in $bodyextra to &quot; so the form'll handle it right
+		$bodyextra = str_replace("\"", "&quot;", $bodyextra);
+		echo("<form action=\"action.php\" method=\"post\">\n");
+		echo("<fieldset>");
+		echo("<input type=\"hidden\" name=\"action\" value=\"editpage\" />\n");
+		echo("<input type=\"hidden\" name=\"pagefilename\" value=\"" . $pagefilename . "\" />\n");
+		echo("<label for=\"pagename\">Page name:</label><br />\n");
+		echo("<input type=\"text\" name=\"pagename\" id=\"pagename\" style=\"width: 400px;\" value=\"" . $pagename . "\" /><br />\n");
+		echo("<label for=\"content\">Content:</label><br />\n");
+		echo("<textarea name=\"content\" id=\"content\" cols=\"60\" rows=\"15\" onkeyup=\"showPreview('content', 'htmlpreview')\">" . $content . "</textarea><br />\n");
+		echo("Live preview:<br />");
+		echo("<div id=\"htmlpreview\" style=\"border: 1px solid #d0d0d0; background-color: #ffffff; color: #000000;\"><p style=\"color: #c0c0c0;\">Your live preview will appear here, if you have JavaScript enabled.</p></div>");
+		echo("<label for=\"headextra\">Extra header (optional):</label><br />\n");
+		echo("<textarea name=\"headextra\" id=\"headextra\" cols=\"60\" rows=\"5\">" . $headextra . "</textarea><br />\n");
+		echo("<label for=\"bodyextra\">Extra <code>&lt;body&gt;</code> tag content (<code>onload</code>, etc.) (optional):</label><br />\n");
+		echo("<input type=\"text\" name=\"bodyextra\" id=\"bodyextra\" style=\"width: 400px;\" value=\"" . $bodyextra . "\" /><br />\n");
+		echo("<input type=\"submit\" value=\"Edit page\" />\n");
+		echo("</fieldset>");
+		echo("</form>");
+	}
+}
+
+?>

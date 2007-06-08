@@ -1,0 +1,43 @@
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: movefile.txt
+Description: Admin Control Panel action module; move a file.
+
+*/
+
+?>
+<h2>Moving file...</h2>
+<?php
+
+// Get some POSTed variables.
+$currentfilename = trim($_POST["currentfilename"]);
+$newfilename = trim($_POST["newfilename"]);
+
+if ($currentfilename != "" && $newfilename != "") {
+	$currentfilepath = $websiteuploaddir . $currentfilename;
+	$newfilepath = $websiteuploaddir . $newfilename;
+	if (file_exists($currentfilepath) && !file_exists($newfilepath)) {
+		$moved = rename($currentfilepath, $newfilepath);
+		if ($moved) {
+			echo("<p>" . $currentfilename . " has been successfully moved.");
+		}
+		else {
+			echo("<p>" . $currentfilename . " could not be moved!");
+		}
+	}
+	else {
+		echo("<p>" . $currentfilename . " could not be moved - the current filename was not found, or the destination already exists!");
+	}
+}
+else {
+	echo("<p>" . $currentfilename . " could not be moved - you left one of the fields blank!");
+}
+
+?>
+<p>(You will be redirected to the Admin Control Panel automatically. Click <a href="<?php echo($websiteadminindex . ".php?page=" . $action ); ?>">here</a> if you don't want to wait.)</p>

@@ -1,0 +1,96 @@
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: changesettings.txt
+Description: Admin Control Panel action module; change Seemes' settings.
+
+*/
+
+?>
+<h2>Changing settings...</h2>
+<?php
+
+// Get POSTed values...
+$newwebsitename = $_POST["newwebsitename"];
+$newwebsitecopyright = htmlentities($_POST["newwebsitecopyright"]);
+$newwebsitetheme = $_POST["newwebsitetheme"];
+$newwebsitepassword = $_POST["newwebsitepassword"];
+$newwebsitepasswordverify = $_POST["newwebsitepasswordverify"];
+
+// Check if the new website name is more than 1 character long...
+if (strlen($newwebsitename) > 1) {
+	// It is, change the website name.
+	$websitename = $newwebsitename;
+}
+
+// Check if the new website copyright is more than 1 character long...
+if (strlen($newwebsitecopyright) > 1) {
+	// It is, change the website copyright.
+	$websitecopyright = $newwebsitecopyright;
+}
+
+// Blah blah theme blah blah...
+if (strlen($newwebsitetheme) > 1) {
+	// Blah blah...
+	$websitetheme = $newwebsitetheme;
+}
+
+// Whuteva...
+if (strlen($newwebsitepassword) > 1 && strlen($newwebsitepasswordverify) > 1) {
+	if($newwebsitepassword == $newwebsitepasswordverify) {
+		$websitepassword = sha1($newwebsitepassword);
+	}
+	else {
+		echo("Passwords did not match!");
+	}
+}
+
+
+$configfile = fopen("config.php", "w");
+$write = fwrite($configfile, "<?php
+
+/*
+
+Seemes CMS
+Filename: config.php
+Description: Seemes configuration file.
+
+This software is released under the GPL licence. Please see gpl.txt.
+
+*/
+
+\$seemesversion = \"" . $seemesversion . "\"; // Seemes version number
+\$websiteactiondir = \"" . $websiteactiondir . "\"; // The actions data folder. MUST HAVE LEADING SLASH!
+\$websiteadmindir = \"" . $websiteadmindir . "\"; // The admin data folder. MUST HAVE LEADING SLASH!
+\$websiteadminindex = \"" . $websiteadminindex . "\"; // The main admin PHP file.
+\$websitecopyright = \"" . $websitecopyright . "\"; // The website copyright
+\$websitedatadir = \"" . $websitedatadir . "\"; // The website data folder. MUST HAVE LEADING SLASH!
+\$websitedataextension = \"" . $websitedataextension . "\"; // File extension for the data files. Period needed.
+\$websitedefaultpage = \"" . $websitedefaultpage . "\"; // The filename of the default page. No extension.
+\$websiteerrorpage = \"" . $websiteerrorpage . "\"; // The default error page (404).
+\$websiteheadersize = \"" . $websiteheadersize . "\"; // Size of page title headers.
+\$websiteindex = \"" . $websiteindex . "\"; // The main PHP file.
+\$websitemenuidprefix = \"" . $websitemenuidprefix . "\"; // The prefix for each menu item's ID. This will be followed by the page filename, if $websitemenuids is true. (If $websitemenuids is false, this does nothing.)
+\$websitemenuids = " . $websitemenuids . "; // Turns menu item ID's on or off.
+\$websitename = \"" . $websitename . "\"; // The name of the site.
+\$websitepassword = \"" . $websitepassword . "\"; // The admin password, SHA-1 encrypted (default \"password\")
+\$websiteuploaddir = \"" . $websiteuploaddir . "\"; // The folder for uploads. MUST HAVE LEADING SLASH!
+\$websitetheme = \"" . $websitetheme . "\"; // The php file for the the template you want to use.
+\$websitethemedir = \"" . $websitethemedir . "\"; // The theme directory.
+
+?>");
+fclose($configfile);
+if ($write) {
+	echo("<p>The configuration file has been updated successfully.</p>");
+}
+else {
+	echo("<p>The configuration file could not be written!</p>");
+}
+
+?>
+<p>(You will be redirected to the Admin Control Panel automatically. Click <a href="<?php echo($websiteadminindex . ".php?page=" . $action ); ?>">here</a> if you don't want to wait.)</p>

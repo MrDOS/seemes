@@ -1,0 +1,22 @@
+<h2>Log out</h2>
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: logout.txt
+Description: Admin Control Panel module; logs the user out.
+
+*/
+
+?>
+<form action="action.php" method="post">
+<fieldset>
+<input type="hidden" name="action" value="logout" />
+<label for="logout">Click the button to log out.</label><br />
+<input type="submit" value="Log Out" name="logout" id="logout" />
+</fieldset>
+</form>

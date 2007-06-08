@@ -1,0 +1,25 @@
+<h2>Move page</h2>
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: movepage.txt
+Description: Admin Control Panel module; move a page.
+
+*/
+
+?>
+<form action="action.php" method="post">
+<fieldset>
+<input type="hidden" name="action" value="movepage" />
+<label for="currentfilename">Current filename:</label><br />
+<?php listpages($websitedatadir, true, "currentfilename"); ?><br />
+<label for="newfilename">New filename:</label><br />
+<input type="text" name="newfilename" id="newfilename" /><br />
+<input type="submit" value="Move page" />
+</fieldset>
+</form>

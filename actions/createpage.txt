@@ -1,0 +1,86 @@
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: createpage.txt
+Description: Admin Control Panel action module; creates a new page.
+
+*/
+
+?>
+<h2>Creating page...</h2>
+<?php
+
+// Get some POSTed variables.
+$pagefilename = trim($_POST["pagefilename"]);
+$pagename = stripslashes(trim($_POST["pagename"]));
+$content = stripslashes(trim($_POST["content"]));
+$headextra = trim($_POST["headextra"]);
+$bodyextra = trim($_POST["bodyextra"]);
+$menutype = $_POST["menutype"];
+
+// Make sure the page filename is not blank.
+if ($pagefilename != "") {
+   // Now correct the page path.
+   $pagefilepath = getpage($pagefilename, $websitedatadir);
+   // Make sure the file does not already exist.
+   if (!file_exists($pagefilepath)) {
+      // If it doesn't, write.
+      $file = fopen($pagefilepath, "w");
+      fwrite($file, "<h" . $websiteheadersize . ">" . $pagename . "</h" . $websiteheadersize . ">\n");
+      fwrite($file, $content . "\n");
+      fclose($file);
+      $wrote = true;
+      
+      // See if there's any extra header.
+      if (strlen($headextra) > 0 or strlen($bodyextra) > 0) {
+         // Insert a space at the beggining of $bodyextra
+         $bodyextra = " " . $bodyextra;
+         // Write the file for "extras".
+         $file = fopen($pagefilepath . ".extra", "w");
+         fwrite($file, $bodyextra . "\n");
+         fwrite($file, $headextra);
+         fclose($file);
+      }
+      
+      // See how to handle the menu
+      if ($menutype == "nomenu") {
+	      // Don't add the page to the menu, i.e. do nothing.
+      }
+      elseif ($menutype == "bullet") {
+	      // Add the page as a bullet.
+      	$file = fopen($websitedatadir . "menu.inc", "a");
+      	fwrite($file, "\n**" . $pagefilename);
+      	fclose($file);
+      }
+      else {
+      	// Menu item should be handled normally.
+      	$file = fopen($websitedatadir . "menu.inc", "a");
+      	fwrite($file, "\n" . $pagefilename);
+      	fclose($file);
+   	}
+   }
+   else {
+      // If it does, do nothing.
+      $wrote = false;
+   }
+}
+else {
+   // If it is, do nothing.
+   $wrote = false;
+}
+
+// Now echo status.
+if ($wrote == true) {
+   echo($pagefilepath . " was successfully created.");
+}
+else {
+   echo($pagefilepath . " could not be created!");
+}
+
+?>
+<p>(You will be redirected to the Admin Control Panel automatically. Click <a href="<?php echo($websiteadminindex . ".php?page=" . $action); ?>">here</a> if you don't want to wait.)</p>

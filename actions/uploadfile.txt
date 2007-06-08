@@ -1,0 +1,27 @@
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: upload.txt
+Description: Admin Control Panel action module; upload a file.
+
+*/
+
+?>
+<h2>Uploading file...</h2>
+<?php
+
+$websiteuploaddir = $websiteuploaddir . basename($_FILES["filename"]["name"]);
+if(move_uploaded_file($_FILES["filename"]["tmp_name"], $websiteuploaddir)) {
+	echo("The file " . basename($_FILES["filename"]["name"]) . " has been uploaded successfully.");
+}
+else {
+	echo(basename($_FILES["filename"]["name"]) . " could not be uploaded!");
+}
+
+?>
+<p>(You will be redirected to the Admin Control Panel automatically. Click <a href="<?php echo($websiteadminindex . ".php?page=uploadfile"); ?>">here</a> if you don't want to wait.)</p>

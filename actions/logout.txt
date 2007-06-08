@@ -1,0 +1,21 @@
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: .txt
+Description: Admin Control Panel action module; log the admin user out.
+
+*/
+
+?>
+<h2>Logging out...</h2>
+<?php
+
+session_destroy();
+
+?>
+<p>(You will be redirected to the Admin Control Panel automatically. Click <a href="<?php echo($websiteadminindex . ".php?page=" . $action ); ?>">here</a> if you don't want to wait.)</p>

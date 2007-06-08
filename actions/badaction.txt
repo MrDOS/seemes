@@ -1,0 +1,18 @@
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: badaction.txt
+Description: Bad action.
+
+*/
+
+?>
+
+<h2>Bad action!</h2>
+<p>You have requested an action that I don't know about!</p>
+<p>(You will be redirected to the login page automatically. Click <a href="<?php echo($websiteadminindex . ".php"); ?>">here</a> if you don't want to wait.)</p>

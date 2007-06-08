@@ -1,0 +1,57 @@
+<h2>Delete file</h2>
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: deletefile.txt
+Description: Admin Control Panel module; delete a file.
+
+*/
+
+?>
+<p>Uploaded files are placed in the directory <code><?php echo($websiteuploaddir); ?></code>.</p>
+<form action="action.php" method="post">
+<fieldset>
+<input type="hidden" name="action" value="deletefile" />
+<label for="filename">File to delete:</label><br />
+<?php
+
+// List the files. We can't use listfiles() in this instance because listfiles() automatically echoes everything, and we need to have the raw list so we can remove index.htm from it before we echo it.
+
+// Get the filenames.
+$filename = glob($websiteuploaddir . "*.*");
+
+// Make sure there are some files...
+if (count($filename) > 1) {
+	for ($i = 0; $i < count($filename); $i++) {
+		// Chop $datadir off the filename.
+		$filename[$i] = substr($filename[$i], strlen($websiteuploaddir), strlen($filename[$i]) - strlen($websiteuploaddir));
+	}
+	
+	// Now remove index.htm.
+	$websiteindexhtmindex = array_search("index.htm", $filename);
+	if ($websiteindexhtmindex !== false) {
+		unset($filename[$websiteindexhtmindex]);
+	}
+
+	// Echo the dropdown list.
+	echo("<select name=\"filename\" id=\"filename\">\n");
+	foreach ($filename as $filename) {
+		echo("<option value=\"" . $filename . "\">" . $filename . "</option>\n");
+	}
+	echo("</select><br />\n");
+	echo("<input type=\"submit\" value=\"Delete file\" />");
+}
+else {
+	echo("<span id=\"filename\">There are no files to delete!</span>");
+}
+
+?>
+</fieldset>
+</form>
+<br />
+<div style="background-color: #ffe0e0; border: 1px solid #ff0000; color: #000000"><b>Please note:</b> This is <i>permanent</i>! It is impossible to reverse the deletion process. If you want the file back, you'll have to upload the file again or restore from a backup.</div>

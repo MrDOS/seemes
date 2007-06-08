@@ -1,0 +1,33 @@
+<h2>Change settings</h2>
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: changesettings.txt
+Description: Admin Control Panel module; change Seemes' settings.
+
+*/
+
+?>
+<form action="action.php" method="post">
+<fieldset>
+<input type="hidden" name="action" value="changesettings" />
+<label for="newwebsitename">Website name (current name is <b><?php echo($websitename); ?></b>):</label><br />
+<input type="text" name="newwebsitename" id="newwebsitename" value="" /><br />
+<label for="newwebsitecopyright">Website copyright (current copyright is <b><?php echo($websitecopyright); ?></b>):</label><br />
+<input type="text" name="newwebsitecopyright" id="newwebsitecopyright" value="" /><br />
+<label for="newwebsitetheme">Website theme (current theme is <b><?php echo($websitetheme); ?></b>):</label><br />
+<input type="text" name="newwebsitetheme" id="newwebsitetheme" value="" /><br />
+<label for="newwebsitepassword">Administrator password (only enter if you want to change it):</label><br />
+<input type="password" name="newwebsitepassword" id="newwebsitepassword" value="" /><br />
+<label for="newwebsitepasswordverify">Administrator password (again, the same, and only enter if you want to change it):</label><br />
+<input type="password" name="newwebsitepasswordverify" id="newwebsitepasswordverify" value="" /><br />
+<input type="submit" value="Change settings" />
+</fieldset>
+</form>
+<p><b>Note:</b> Only new values will be updated - to leave a setting unchanged, just don't enter a value.</p>
+<p><b>Note:</b> More advanced settings may be changed by downloading <code>config.php</code> to your computer via FTP and editing it directly.</p>

@@ -1,0 +1,62 @@
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: style.css
+Description: Seemes CMS documentation; cascading style sheet.
+
+*/
+
+body {
+	background-color: #ffffff;
+	color: #000000;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 11pt;
+}
+
+code {
+	background-color: #f0f0f0;
+}
+
+div#menu {
+	float: right;
+	text-align: right;
+}
+
+div#menu a {
+	display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Georgia", serif;
+}
+
+h1 {
+	font-size: 28pt;
+}
+
+h2 {
+	font-size: 24pt;
+}
+
+h3 {
+	font-size: 20pt;
+}
+
+h4 {
+	font-size: 14pt;
+}
+
+h4.functionname {
+	font-family: "courier new", courier;
+}
+
+li {
+	margin-bottom: .5em;
+}
+
+p#footer {
+	font-size: 8pt;
+}

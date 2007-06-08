@@ -1,0 +1,75 @@
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: exitpage.txt
+Description: Admin Control Panel action module; edit a page.
+
+*/
+
+?>
+<h2>Editing page...</h2>
+<?php
+
+// Get some POSTed variables.
+$pagefilename = trim($_POST["pagefilename"]);
+$pagename = stripslashes(trim($_POST["pagename"]));
+$content = stripslashes(trim($_POST["content"]));
+$headextra = trim($_POST["headextra"]);
+$bodyextra = trim($_POST["bodyextra"]);
+
+// Make sure the page filename is not blank.
+if ($pagefilename != "") {
+   // Now correct the page path.
+   $pagefilepath = getpage($pagefilename, $websitedatadir);
+   // Make sure the file already exists. (Not really necessary.)
+   if (file_exists($pagefilepath)) {
+      // If it does, write.
+      $file = fopen($pagefilepath, "w");
+      fwrite($file, "<h" . $websiteheadersize . ">" . $pagename . "</h" . $websiteheadersize . ">\n");
+      fwrite($file, $content . "\n");
+      fclose($file);
+      $wrote = true;
+      
+      // See if there's any extra header.
+      if (strlen($headextra) > 0 or strlen($bodyextra) > 0) {
+	      // Remove magic slashes from $bodyextra...
+	      $bodyextra = stripslashes($bodyextra);
+         // ...and insert a space at the beggining
+         $bodyextra = " " . $bodyextra;
+         // Write the file for "extras".
+         $file = fopen($pagefilepath . ".extra", "w");
+         fwrite($file, $bodyextra . "\n");
+         fwrite($file, $headextra);
+         fclose($file);
+      }
+      else {
+	      if (file_exists($pagefilepath . ".extra")) {
+		      unlink($pagefilepath . ".extra");
+	      }
+      }
+   }
+   else {
+      // If it does, do nothing.
+      $wrote = false;
+   }
+}
+else {
+   // If it is, do nothing.
+   $wrote = false;
+}
+
+// Now echo status.
+if ($wrote == true) {
+   echo($pagefilepath . " was successfully edited.");
+}
+else {
+   echo($pagefilepath . " could not be edited!");
+}
+
+?>
+<p>(You will be redirected to the Admin Control Panel automatically. Click <a href="<?php echo($websiteadminindex . ".php?page=" . $action ); ?>">here</a> if you don't want to wait.)</p>

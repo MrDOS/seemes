@@ -1,0 +1,36 @@
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: deletefile.txt
+Description: Admin Control Panel action module; delete a file.
+
+*/
+
+?>
+<h2>Deleting file...</h2>
+<?php
+
+// Get some POSTed variables.
+$filename = trim($_POST["filename"]);
+
+if ($filename != "") {
+	$filepath = $websiteuploaddir . $filename;
+	if (file_exists($filepath)) {
+		$deleted = unlink($filepath);
+	}
+}
+
+if ($deleted) {
+	echo("<p>" . $filename . " has been successfully deleted.");
+}
+else {
+	echo("<p>" . $filename . " could not be deleted!");
+}
+
+?>
+<p>(You will be redirected to the Admin Control Panel automatically. Click <a href="<?php echo($websiteadminindex . ".php?page=" . $action ); ?>">here</a> if you don't want to wait.)</p>

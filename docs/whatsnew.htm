@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<!--
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: .htm
+Description: Seemes CMS documentation; .
+
+-->
+<title>Seemes 0.2 Beta 2 - Documentation - What's new</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
+</head>
+<body>
+<h1>Seemes 0.2 Beta 2 - Documentation</h1>
+<h2>What's new</h2>
+<hr />
+<h3>Version 0.2 Beta 2</h3>
+<p><b>Release date:</b> 7 June, 2007</p>
+<h4>Version description</h4>
+<p>Seemes 0.2 Beta 2 is an update to Seemes 0.2 Beta 1, including bug fixes and feature updates.</p>
+<h4>New features</h4>
+<ul>
+<li>External links may now be placed in the main menu.</li>
+<li>Filename entry is now done using a dropdown box instead of a text input box.</li>
+<li>Menu items now have their own ID's.</li>
+<li>There is now a page load timer; access the current load time by calling <code>timerreturn()</code>.</li>
+<li>You can now specify how a page should be added to the menu when creating the page.</li>
+</ul>
+<h4>Bug fixes</h4>
+<ul>
+<li><code>&lt;/textarea&gt;</code>'s no longer terminate the editing space in the Edit page control panel. (This is done by converting all instances of <code>/</code> to the element <code>&amp;#x2F;</code> when the page is loaded for editing; the symbol is automatically reverted to <code>/</code> when the page is saved.)</li>
+<li>Slashes are now stripped from page names upon page load.</li>
+<li>The name of the temp variable used to store the content of the menu while loading the Edit menu control panel has been changed from <code>$menu</code> to <code>$menucontent</code> to avoid overwriting the formatted menu. (This bug made menu editing difficult while using theme files that placed the menu after the page content in the page's HTML.)</li>
+</ul>
+<hr />
+<h3>Version 0.2 Beta 1</h3>
+<p><b>Release date:</b> 25 March, 2007</p>
+<h4>Version description</h4>
+<p>Seemes 0.2 Beta 1 is a complete rewrite of Seemes 0.1e.</p>
+<h4>New features</h4>
+<ul>
+<li>Better error reporting.</li>
+<li>New file management features.</li>
+</ul>
+<h4>Bug fixes</h4>
+<ul>
+<li>Being a rewrite, no bugs from previous versions have been fixed.</li>
+</ul>
+<hr />
+<p id="footer"><b>Seemes CMS</b> is copyright 2007 MagicWare, and is released under the GNU General Public Licence 2.0.</p>
+</body>
+</html>

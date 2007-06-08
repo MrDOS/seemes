@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<!--
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: installation.htm
+Description: Seemes CMS documentation; installation instructions.
+
+-->
+<title>Seemes 0.2 Beta 2 - Documentation - Installation</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
+</head>
+<body>
+<h1>Seemes 0.2 Beta 2 - Documentation</h1>
+<h2>Installation</h2>
+<hr />
+<p>Installation should be relatively quick and simple. To complete it with minimal difficulty, please follow the steps below:</p>
+<ol>
+<li>Upload all the files in the ZIP to your webserver.</li>
+<li><code>CHMOD</code>* the following:
+<ul>
+<li>The folder that Seemes is in: <code>777</code></li>
+<li><code>files/</code> (the folder): <code>777</code></li>
+<li><code>data/</code> (the folder): <code>777</code></li>
+<li><code>data/</code> (the contents of): <code>666</code></li>
+</ul>
+</li>
+<li>Open (the uploaded copy of) <code>install.php</code> in your browser.</li>
+<li>Fill out the form:
+<ol>
+<li><b>Website name:</b> This is the name of your site.</li>
+<li><b>Website copyright:</b> This will appear as a footer at the bottom of your site. Generally, you'll want copyright information here.</li>
+<li><b>Website theme:</b> The theme your website will use. If you haven't already uploaded your own theme, don't change this.</li>
+<li><b>Password:</b> This is the password used to make changes to your site. You know the rules by now, alphanumeric, not too short, blah blah blah... Seemes doesn't enforce any character constraints, however, the password must be more than 6 characters long. (And please, <i>don't</i> use <code>password</code>... it's the first thing anyone tries.)</li>
+</ol>
+</li>
+<li>Now browse to the root of the folder you've installed to. Your website should be up and running.</li>
+<li><b>Note:</b> It is <i>highly recommended</i> that you delete the files <code>install.php</code> and <code>install2.php</code>. They <i>have not</i> been tested for security vulnerabilities and someone who knows what they're doing could possibly reset your entire site configuration, including your password.</li>
+</ol>
+<hr />
+<p>* - If you don't know how to <code>CHMOD</code> a file, look it up in your FTP client's** documentation.</p>
+<p>** - You know, the program you use to upload things to your web server...</p>
+<hr />
+<p id="footer"><b>Seemes CMS</b> is copyright 2007 MagicWare, and is released under the GNU General Public Licence 2.0.</p>
+</body>
+</html>

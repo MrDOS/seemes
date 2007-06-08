@@ -1,0 +1,41 @@
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: defaulttheme.txt
+Description: Default theme.
+
+*/
+
+ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<title><?php echo($websitename); ?> - <?php echo($pagename); ?></title>
+<link rel="stylesheet" href="themes/defaultstyle.css" type="text/css" />
+<?php echo($headextra); ?>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
+</head>
+<body<?php echo($bodyextra); ?>>
+<div id="container">
+<div id="header">
+<h1><?php echo($websitename); ?></h1>
+</div>
+<div id="menu">
+<?php echo($menu); ?>
+</div>
+<div id="main">
+<?php include($page); ?>
+
+<br style="clear: both;" />
+</div>
+</div>
+<div id="footer">
+<p><?php echo($websitecopyright); ?> &bull; Powered by <b>Seemes</b> version <?php echo($seemesversion); ?> &bull; Page generated in <?php echo(timerreturn($starttime)); ?> seconds</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+home
+createpage
+deletepage
+editpage
+movepage
+editmenu
+uploadfile
+deletefile
+movefile
+changesettings
+logout
