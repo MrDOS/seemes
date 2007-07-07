@@ -17,6 +17,10 @@ $currenttime = explode(" ", $currenttime);
 $currenttime = $currenttime[0] + $currenttime[1];
 $starttime = $currenttime;
 
+if (!file_exists("config.php")) {
+	exit("<code>config.php</code> could not be found! Have you run <a href=\"install.php\">the installer</a>?");
+}
+
 // Include Seemes configuration and functions.
 require("config.php");
 require("functions.php");

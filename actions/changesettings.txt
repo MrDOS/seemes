@@ -16,9 +16,9 @@ Description: Admin Control Panel action module; change Seemes' settings.
 <?php
 
 // Get POSTed values...
-$newwebsitename = $_POST["newwebsitename"];
-$newwebsitecopyright = htmlentities($_POST["newwebsitecopyright"]);
-$newwebsitetheme = $_POST["newwebsitetheme"];
+$newwebsitename = trim(stripslashes($_POST["newwebsitename"]));
+$newwebsitecopyright = trim(stripslashes($_POST["newwebsitecopyright"]));
+$newwebsitetheme = trim(stripslashes($_POST["newwebsitetheme"]));
 $newwebsitepassword = $_POST["newwebsitepassword"];
 $newwebsitepasswordverify = $_POST["newwebsitepasswordverify"];
 

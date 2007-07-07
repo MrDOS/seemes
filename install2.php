@@ -34,10 +34,10 @@ html {
 
 include("functions.php");
 
-$gplagree = makesafe($_POST["gplagree"], true, false);
-$websitename = makesafe($_POST["websitename"], true, false);
-$websitecopyright = makesafe($_POST["websitecopyright"], true, false);
-$websitetheme = makesafe($_POST["websitetheme"], true, false);
+$gplagree = $_POST["gplagree"];
+$websitename = trim(stripslashes($_POST["websitename"]));
+$websitecopyright = trim(stripslashes($_POST["websitecopyright"]));
+$websitetheme = trim(stripslashes($_POST["websitetheme"]));
 $websitepassword = $_POST["websitepassword"];
 $websitepasswordverify = $_POST["websitepasswordverify"];
 
@@ -84,7 +84,7 @@ Description: Seemes configuration file.
 
 */
 
-\$seemesversion = \"0.2 Beta 2\"; // Seemes version number
+\$seemesversion = \"0.2\"; // Seemes version number
 \$websiteactiondir = \"actions/\"; // The actions data folder. MUST HAVE LEADING SLASH!
 \$websiteadmindir = \"admin/\"; // The admin data folder. MUST HAVE LEADING SLASH!
 \$websiteadminindex = \"admin\"; // The main admin PHP file.

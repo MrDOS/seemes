@@ -52,10 +52,11 @@ if (!file_exists("config.php")) {
 <label for=\"websitename\">Website name:</label>
 <input type=\"text\" name=\"websitename\" id=\"websitename\" value=\"Seemes Site\" /><br />
 <label for=\"websitecopyright\">Website copyright:</label>
-<input type=\"text\" name=\"websitecopyright\" id=\"websitecopyright\" value=\"&copy;2007 Your Name\" /><br />
+<input type=\"text\" name=\"websitecopyright\" id=\"websitecopyright\" value=\"&amp;copy;2007 Your Name\" /><br />
+<p><b>Please note:</b> Special characters (e.g. &copy;) used in the website name and website copyright should be entered using their character code (e.g. &amp;copy) instead of just entering the character. <i>Special characters will not automatically be converted into their HTML entity!</i></p>
 <label for=\"websitetheme\">Website theme (only change if you have already uploaded your own theme):</label>
 <input type=\"text\" name=\"websitetheme\" id=\"websitetheme\" value=\"defaulttheme.txt\" /><br />
-<label for=\"websitepassword\">Administrator password:</label>
+<label for=\"websitepassword\">Administrator password (minimum 6 characters):</label>
 <input type=\"password\" name=\"websitepassword\" id=\"websitepassword\" value=\"\" /><br />
 <label for=\"websitepasswordverify\">Administrator password (again, the same):</label>
 <input type=\"password\" name=\"websitepasswordverify\" id=\"websitepasswordverify\" value=\"\" /><br />
@@ -64,7 +65,7 @@ if (!file_exists("config.php")) {
 <legend>Legal</legend>
 <p><b>Please note:</b> Seemes CMS is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the <a href=\"gpl.txt\">GNU General Public License version 2</a> for more details.</p>
 <input type=\"checkbox\" name=\"gplagree\" id=\"gplagree\" />
-I agree to the terms of the <a href=\"gpl.txt\">GNU General Public Licence version 2</a>.<br />
+<label for=\"gplagree\">I agree to the terms of the <a href=\"gpl.txt\">GNU General Public Licence version 2</a>.</label><br />
 </fieldset>
 <fieldset>
 <input type=\"submit\" value=\"Install Seemes!\" />

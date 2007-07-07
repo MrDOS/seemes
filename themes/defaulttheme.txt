@@ -16,9 +16,9 @@ Description: Default theme.
 <html>
 <head>
 <title><?php echo($websitename); ?> - <?php echo($pagename); ?></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="themes/defaultstyle.css" type="text/css" />
 <?php echo($headextra); ?>
-<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
 </head>
 <body<?php echo($bodyextra); ?>>
 <div id="container">
