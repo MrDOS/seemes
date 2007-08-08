@@ -74,6 +74,7 @@ This software is released under the GPL licence. Please see gpl.txt.
 \$websitedefaultpage = \"" . $websitedefaultpage . "\"; // The filename of the default page. No extension.
 \$websiteerrorpage = \"" . $websiteerrorpage . "\"; // The default error page (404).
 \$websiteheadersize = \"" . $websiteheadersize . "\"; // Size of page title headers.
+\$websiteimagedir = \"" . $websiteimagedir . "\"; // The image folder. MUST HAVE LEADING SLASH!
 \$websiteindex = \"" . $websiteindex . "\"; // The main PHP file.
 \$websitemenuidprefix = \"" . $websitemenuidprefix . "\"; // The prefix for each menu item's ID. This will be followed by the page filename, if $websitemenuids is true. (If $websitemenuids is false, this does nothing.)
 \$websitemenuids = " . $websitemenuids . "; // Turns menu item ID's on or off.

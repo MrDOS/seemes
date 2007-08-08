@@ -11,12 +11,12 @@ Filename: functions.htm
 Description: Seemes CMS documentation; built-in functions reference.
 
 -->
-<title>Seemes 0.2 - Documentation - System Functions</title>
+<title>Seemes CMS 0.3 - Documentation - System Functions</title>
 <link rel="stylesheet" href="style.css" type="text/css" />
-<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
 </head>
 <body>
-<h1>Seemes 0.2 - Documentation</h1>
+<h1>Seemes CMS 0.3 - Documentation</h1>
 <h2>System Functions</h2>
 <hr />
 <h4>Introduction</h4>
@@ -58,14 +58,14 @@ Description: Seemes CMS documentation; built-in functions reference.
 <p><b>Purpose:</b> Opens a data file and retrieves the page name from the first line of the file (after stripping any HTML tags). Requires a path, not just a filename.</p>
 <hr />
 <h4 class="functionname"><a name="listfiles">listfiles</a></h4>
-<p><b>Syntax:</b> <code><span style="color: #ff0000;">listfiles</span>(<span style="color: #0060c0;">$datadir</span>, <span style="color: #0060c0;">$dropdownlist</span>, <span style="color: #0060c0;">$dropdownid</span>);</code><br />
-<b>Returns:</b> string</p>
-<p><b>Purpose:</b> Lists all files in directory <code>$datadir</code>. If <code>$dropdownlist</code> is true, it will return a <code>&lt;select&gt;</code> element containing the items. <code>$dropdownid</code> is the ID and name to be given the <code>&lt;select&gt;</code>.</p>
+<p><b>Syntax:</b> <code><span style="color: #ff0000;">listfiles</span>(<span style="color: #0060c0;">$datadir</span>, <span style="color: #0060c0;">$removefolders</span>, <span style="color: #0060c0;">$filestoremove</span>, <span style="color: #0060c0;">$showresults</span>, <span style="color: #0060c0;">$dropdownlist</span>, <span style="color: #0060c0;">$dropdownid</span>);</code><br />
+<b>Returns:</b> nothing or array</p>
+<p><b>Purpose:</b> Lists all files in directory <code>$datadir</code>. <code>$removefolders</code> is a boolean variable that indicates whether or not folders should be removed from the output. <code>$filestoremove</code> indicates what files (if any) should be removed from the output (single files should be passed as a string, and multiple files as an array). <code>$showresults</code> is a boolean variable that indicates wether or not the results should be echo'd directly; if false, the function will return an array of all the files. If <code>$dropdownlist</code> (and <code>$showfiles</code>) is true, it will return a <code>&lt;select&gt;</code> element containing the items. <code>$dropdownid</code> is the ID and name to be given the <code>&lt;select&gt;</code>.</p>
 <hr />
 <h4 class="functionname"><a name="listpages">listpages</a></h4>
-<p><b>Syntax:</b> <code><span style="color: #ff0000;">listpages</span>(<span style="color: #0060c0;">$datadir</span>, <span style="color: #0060c0;">$dropdownlist</span>, <span style="color: #0060c0;">$dropdownid</span>);</code><br />
-<b>Returns:</b> string</p>
-<p><b>Purpose:</b> Lists all pages in directory <code>$datadir</code>. If <code>$dropdownlist</code> is true, it will return a <code>&lt;select&gt;</code> element containing the items. <code>$dropdownid</code> is the ID and name to be given the <code>&lt;select&gt;</code>.</p>
+<p><b>Syntax:</b> <code><span style="color: #ff0000;">listfiles</span>(<span style="color: #0060c0;">$datadir</span>, <span style="color: #0060c0;">$pagestoremove</span>, <span style="color: #0060c0;">$showresults</span>, <span style="color: #0060c0;">$dropdownlist</span>, <span style="color: #0060c0;">$dropdownid</span>);</code><br />
+<b>Returns:</b> nothing or array</p>
+<p><b>Purpose:</b> Lists all pages in directory <code>$datadir</code>. <code>$pagestoremove</code> indicates what pages (if any) should be removed from the output (single pages should be passed as a string, and multiple files as an array). <code>$showresults</code> is a boolean variable that indicates wether or not the results should be echo'd directly; if false, the function will return an array of all the files. If <code>$dropdownlist</code> is true, it will return a <code>&lt;select&gt;</code> element containing the items. <code>$dropdownid</code> is the ID and name to be given the <code>&lt;select&gt;</code>.</p>
 <hr />
 <h4 class="functionname"><a name="makesafe">makesafe</a></h4>
 <p><b>Syntax:</b> <code><span style="color: #ff0000;">makesafe</span>(<span style="color: #0060c0;">$unsafestring</span>, <span style="color: #0060c0;">$removeslashes</span>, <span style="color: #0060c0;">$removeperiods</span>);</code><br />

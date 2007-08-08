@@ -15,7 +15,7 @@ Description: Admin Control Panel module; create a new page.
 ?>
 <p>Page listing:</p>
 <pre>
-<?php listpages($websitedatadir, false, ""); ?>
+<?php listpages($websitedatadir, "", true, false, ""); ?>
 </pre>
 <form action="action.php" method="post">
 <fieldset>
@@ -25,13 +25,13 @@ Description: Admin Control Panel module; create a new page.
 <label for="pagename">Page name:</label><br />
 <input type="text" name="pagename" id="pagename" style="width: 400px;" /><br />
 <label for="content">Content:</label><br />
-<textarea name="content" id="content" cols="60" rows="15" onkeyup="showPreview('content', 'htmlpreview')"></textarea><br />
+<textarea name="content" id="content" cols="80" rows="25" onkeyup="showPreview('content', 'htmlpreview')"></textarea><br />
 Live preview:<br />
 <div id="htmlpreview" style="border: 1px solid #d0d0d0; background-color: #ffffff; color: #000000;"><p style="color: #c0c0c0;">Your live preview will appear here, if you have JavaScript enabled.</p></div>
 </fieldset>
 <fieldset>
 <label for="headextra">Extra header (optional):</label><br />
-<textarea name="headextra" id="headextra" cols="60" rows="5"></textarea><br />
+<textarea name="headextra" id="headextra" cols="80" rows="5"></textarea><br />
 <label for="bodyextra">Extra <code>&lt;body&gt;</code> tag content (<code>onload</code>, etc.) (optional):</label><br />
 <input type="text" name="bodyextra" id="bodyextra" style="width: 400px;" /><br />
 </fieldset>

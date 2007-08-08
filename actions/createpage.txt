@@ -35,6 +35,7 @@ if ($pagefilename != "") {
       fwrite($file, $content . "\n");
       fclose($file);
       $wrote = true;
+      chmod($pagefilepath, 0666);
       
       // See if there's any extra header.
       if (strlen($headextra) > 0 or strlen($bodyextra) > 0) {

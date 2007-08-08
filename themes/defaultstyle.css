@@ -106,5 +106,10 @@ input {
 }
 
 textarea {
-	font-family: "Lucida Monospaced", courier;
+	font-family: "Lucida Monospaced", monospace;
+	font-size: 10pt;
+}
+
+pre {
+	font-family: "Lucida Console", monospace;
 }

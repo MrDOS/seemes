@@ -37,13 +37,14 @@ else {
 <form action="action.php" method="post">
 <fieldset>
 <input type="hidden" name="action" value="editmenu" />
-<textarea name="content" cols="60" rows="15"><?php echo($menucontent); ?></textarea><br />
+<textarea name="content" cols="80" rows="25"><?php echo($menucontent); ?></textarea><br />
 <input type="submit" value="Edit menu" />
 </fieldset>
 </form>
 <p>Tips:</p>
 <ul>
-<li>Putting <code>((</code> in front of an item will remove it from the menu. (However, don't use this as a way of shielding a page from the public, the raw menu data will still be avaliable. To make it totally hidden, just remove the entry.)</li>
+<li>Putting <code>((</code> in front of an item will remove it from the menu. (However, don't use this as a way of shielding a page from the public, because the raw menu data will still be viewable. To make it totally hidden, remove the entry.)</li>
 <li>Putting <code>**</code> in front of an item will display it with a bullet (&bull;) in front of it.</li>
 <li>Putting <code>!!</code> in front of an item will make an absolute link, i.e. <code>!!http://mysite.com</code> would link to <code>http://mysite.com</code> and not <code>http://mysite.com/index.php?page=http://mysite.com</code>. To describe the link in the menu, separate the URL from the name with another <code>!!</code>, i.e. <code>!!http://mysite.com!!My Site</code> would display as <b>My Site</b> in the menu.</li>
+<li>Having several normal menu items on one line separated by <code>|</code>'s will cause the menu items after the first to only appear if you're on one of those menu items.</li>
 </ul>

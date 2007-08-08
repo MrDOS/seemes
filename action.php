@@ -59,14 +59,21 @@ if ($_SESSION["seemeslogin"] == $websitepassword) {
 	elseif ($action == "uploadfile") {
 		$page = $websiteactiondir . "uploadfile" . $websitedataextension;
 		$pagename = "Uploading file...";
+		$action = "file";
 	}
 	elseif ($action == "deletefile") {
 		$page = $websiteactiondir . "deletefile" . $websitedataextension;
 		$pagename = "Deleting file...";
+		$action = "file";
 	}
 	elseif ($action == "movefile") {
 		$page = $websiteactiondir . "movefile" . $websitedataextension;
 		$pagename = "Moving file...";
+		$action = "file";
+	}
+	elseif ($action == "edittheme") {
+		$page = $websiteactiondir . "edittheme" . $websitedataextension;
+		$pagename = "Editing theme...";
 	}
 	else {
 		$page = $websiteactiondir . "badaction" . $websitedataextension;

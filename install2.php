@@ -1,4 +1,4 @@
-<?
+<?php
 
 /*
 
@@ -94,6 +94,7 @@ Description: Seemes configuration file.
 \$websitedefaultpage = \"home\"; // The filename of the default page. No extension.
 \$websiteerrorpage = \"error.inc\"; // The default error page (404).
 \$websiteheadersize = \"2\"; // Size of page title headers.
+\$websiteimagedir = \"img/\"; // The image folder. MUST HAVE LEADING SLASH!
 \$websiteindex = \"index\"; // The main PHP file.
 \$websitemenuidprefix = \"menu\"; // The prefix for each menu item's ID. This will be followed by the page filename, if $websitemenuids is true. (If $websitemenuids is false, this does nothing.)
 \$websitemenuids = true; // Turns menu item ID's on or off.
@@ -105,6 +106,7 @@ Description: Seemes configuration file.
 
 ?>");
 				fclose($configfile);
+				chmod("config.php", 0666);
 				if ($write) {
 					echo("<p>Installation successful! Click <a href=\"index.php\">here</a> to view the site.</p>");
 					echo("<p><b>Please note:</b> It is highly recommended that you delete the files <code>install.php</code> and <code>install2.php</code> for security reasons.</p>");

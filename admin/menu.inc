@@ -4,8 +4,7 @@ deletepage
 editpage
 movepage
 editmenu
-uploadfile
-deletefile
-movefile
+file
+edittheme
 changesettings
 logout

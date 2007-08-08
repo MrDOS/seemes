@@ -44,7 +44,7 @@ function getmenu($datadir, $phpfile) {
 	// Get the website menu.
 	
 	// Get some necessary variables out of config.php.
-	global $websitemenuidprefix, $websitemenuids;
+	global $websitemenuidprefix, $websitemenuids, $requestedpage;
 	
 	// First, make sure that the menu variable is blank.
 	$menu = "";
@@ -56,8 +56,8 @@ function getmenu($datadir, $phpfile) {
 		while (!feof($pageread)) {
 			$currentitem = trim(fgets($pageread));
 			// Now check to see if the first two characters of the name are (( (comment) or ** (bullet)
-			if (substr($currentitem, 0, 2) == "((") {
-				// Comment, do nothing.
+			if (substr($currentitem, 0, 2) == "((" || $currentitem == "") {
+				// Comment or blank line, do nothing.
 			}
 			elseif (substr($currentitem, 0, 2) == "**") {
 				// Bullet, remove ** and add a &bull; symbol.
@@ -78,14 +78,37 @@ function getmenu($datadir, $phpfile) {
 			}
 			else {
 				// It's normal, be normal.
-				$currentitempath = getpage($currentitem, $datadir);
+				$currentitem = explode("|", $currentitem);
+				$currentitempath = getpage($currentitem[0], $datadir);
 				$currentitemname = getpagename($currentitempath);
-				$menu = $menu . "<a href=\"" . $phpfile . ".php?page=" . $currentitem . "\"";
+				$menu = $menu . "<a href=\"" . $phpfile . ".php?page=" . $currentitem[0] . "\"";
 				// See if we need to assign an ID.
 				if ($websitemenuids == true) {
-					$menu = $menu . " id=\"" . $websitemenuidprefix . $currentitem . "\"";
+					$menu = $menu . " id=\"" . $websitemenuidprefix . $currentitem[0] . "\"";
+					
+					$menu = $menu . ">" . $currentitemname . "</a>\n";
+					
+					$currentmenuitem = false;
+					foreach($currentitem as $currentsubitem) {
+						if ($currentsubitem == $requestedpage) {
+							$currentmenuitem = true;
+						}
+					}
+					if ($currentmenuitem == true) {
+						if (count($currentitem) > 1) {
+							for ($i = 1; $i < count($currentitem); $i++) {
+								$currentitempath = getpage($currentitem[$i], $datadir);
+								$currentitemname = "&bull;&nbsp;" . getpagename($currentitempath);
+								$menu = $menu . "<a href=\"" . $phpfile . ".php?page=" . $currentitem[$i] . "\"";
+								// See if we need to assign an ID.
+								if ($websitemenuids == true) {
+									$menu = $menu . " id=\"" . $websitemenuidprefix . $currentitem[$i] . "\"";
+								}
+							$menu = $menu . ">" . $currentitemname . "</a>\n";
+							}
+						}
+					}
 				}
-				$menu = $menu . ">" . $currentitemname . "</a>\n";
 			}
 		}
 		fclose($pageread);
@@ -123,57 +146,117 @@ function getpagename($page) {
 	return $pagename;
 }
 
-function listfiles($datadir, $dropdownlist, $dropdownid) {
+function listfiles($datadir, $removefolders, $filestoremove, $showresults, $dropdownlist, $dropdownid) {
+	// Make $filestoremove an array if there's only one entry (makes things easier later).
+	if (count($filestoremove) <= 1) {
+		$filestoremove = array($filestoremove);
+	}
+	// Get the length of the data directory string.
+	$datadirlen = strlen($datadir);
 	// Get the filenames.
-	$filename = glob($datadir . "*.*");
+	$filename = glob($datadir . "*");
 	for ($i = 0; $i < count($filename); $i++) {
+		$folder = is_dir($filename[$i]);
 		// Chop $datadir off the filename.
-		$filename[$i] = substr($filename[$i], strlen($datadir), strlen($filename[$i]) - strlen($datadir));
+		$filename[$i] = substr($filename[$i], $datadirlen, strlen($filename[$i]) - $datadirlen);
+		if ($folder) {
+			if (!$removefolders) {
+				$filename[$i] = $filename[$i] . " (folder)";
+			}
+			else {
+				unset($filename[$i]);
+			}
+		}
 	}
 	
-	// Now, are we simply echoing, or are we producing a list?
-	if ($dropdownlist) {
-		// Let's make lists!
-		echo("<select name=\"" . $dropdownid . "\" id=\"" . $dropdownid . "\">\n");
-		foreach ($filename as $filename) {
-			echo("<option value=\"" . $filename . "\">" . $filename . "</option>\n");
-		}
-		echo("</select>\n");
-	}
-	else {
-		// Echo... echo... echo...
-		foreach ($filename as $filename) {
-  			echo($filename . "\n");
+	// Remove files in $filestoremove.
+	if (count($filestoremove) >= 1) {
+		foreach ($filestoremove as $filetoremove) {
+			$filetoremoveindex = array_search($filetoremove, $filename);
+			if ($filetoremoveindex !== false) {
+				unset($filename[$filetoremoveindex]);
+			}
 		}
 	}
+	
+	// Are we allowed to echo the results?
+	if ($showresults) {
+		// Now, are we simply echoing, or are we producing a list?
+		if ($dropdownlist) {
+			// Let's make lists!
+			echo("<select name=\"" . $dropdownid . "\" id=\"" . $dropdownid . "\">\n");
+			foreach ($filename as $filename) {
+				echo("<option value=\"" . $filename . "\">" . $filename . "</option>\n");
+			}
+			echo("</select>\n");
+		}
+		else {
+			// Echo... echo... echo...
+			foreach ($filename as $filename) {
+  				echo($filename . "\n");
+			}
+		}
+	}
+	
+	return $filename;
 }
 
-function listpages($datadir, $dropdownlist, $dropdownid) {
+function listpages($datadir, $pagestoremove, $showresults, $dropdownlist, $dropdownid) {
 	global $websitedataextension;
+	// Make $pagestoremove an array if there's only one entry (makes things easier later).
+	if (count($pagestoremove) <= 1) {
+		$pagestoremove = array($pagestoremove);
+	}
+	// Get the length of the data directory string.
+	$datadirlen = strlen($datadir);
+	// Get the length of the website data extension string.
+	$websitedataextensionlen = strlen($websitedataextension);
 	// Get the filenames.
 	$filename = glob($datadir . "*" . $websitedataextension);
 	for ($i = 0; $i < count($filename); $i++) {
 		// Chop $datadir off the filename.
-		$filename[$i] = substr($filename[$i], strlen($datadir), strlen($filename[$i]) - strlen($datadir));
+		$filename[$i] = substr($filename[$i], $datadirlen, strlen($filename[$i]) - $datadirlen);
 		// Now $websitedataextension.
-		$filename[$i] = substr($filename[$i], 0, strlen($filename[$i]) - strlen($websitedataextension));
+		$filename[$i] = substr($filename[$i], 0, strlen($filename[$i]) - $websitedataextensionlen);
 	}
 	
-	// Now, are we simply echoing, or are we producing a list?
-	if ($dropdownlist) {
-		// Let's make lists!
-		echo("<select name=\"" . $dropdownid . "\" id=\"" . $dropdownid . "\">\n");
-		foreach ($filename as $filename) {
-			echo("<option value=\"" . $filename . "\">" . $filename . "</option>\n");
+	// Remove files in $pagestoremove.
+	if (count($pagestoremove) >= 1) {
+		foreach ($pagestoremove as $filetoremove) {
+			$filetoremoveindex = array_search($filetoremove, $filename);
+			if ($filetoremoveindex !== false) {
+				unset($filename[$filetoremoveindex]);
+			}
 		}
-		echo("</select>\n");
+	}
+	
+	// Make sure that there are entries left.
+	if (count($filename) >= 1) {
+		// Are we allowed to echo the results?
+		if ($showresults) {
+			// Now, are we simply echoing, or are we producing a list?
+			if ($dropdownlist) {
+				// Let's make lists!
+				echo("<select name=\"" . $dropdownid . "\" id=\"" . $dropdownid . "\">\n");
+				foreach ($filename as $filename) {
+					echo("<option value=\"" . $filename . "\">" . $filename . "</option>\n");
+				}
+				echo("</select>\n");
+			}
+			else {
+				// Echo... echo... echo...
+				foreach ($filename as $filename) {
+  					echo($filename . "\n");
+				}
+			}
+		}
 	}
 	else {
-		// Echo... echo... echo...
-		foreach ($filename as $filename) {
-  			echo($filename . "\n");
+		if ($showresults) {
+			echo("No pages found!");
 		}
 	}
+	return $filename;
 }
 
 function makesafe($unsafestring, $removeslashes, $removeperiods) {

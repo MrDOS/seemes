@@ -6,16 +6,22 @@ Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
 Copyright 2007 MagicWare
-Filename: .txt
-Description: Admin Control Panel action module; log the admin user out.
+Filename: editmenu.txt
+Description: Admin Control Panel action module; menu editor.
 
 */
 
 ?>
-<h2>Logging out...</h2>
+<h2></h2>
 <?php
 
-session_destroy();
+// Get some POSTed variables.
+$content = stripslashes(trim($_POST["content"]));
+$themefilename = trim($_POST["themefilename"]);
+
+$file = fopen($websitethemedir . $themefilename, "w");
+fwrite($file, $content);
+fclose($file);
 
 ?>
 <p>(You will be redirected to the Admin Control Panel automatically. Click <a href="<?php echo($websiteadminindex . ".php?page=" . $action ); ?>">here</a> if you don't want to wait.)</p>

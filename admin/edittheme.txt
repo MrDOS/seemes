@@ -1,0 +1,67 @@
+<h2>Edit theme</h2>
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: edittheme.txt
+Description: Admin Control Panel module; edit a theme file.
+
+*/
+
+?>
+<form action="admin.php?page=edittheme" method="post">
+<fieldset>
+<label for="themefilename">Theme filename:</label><br />
+<?php listfiles($websitethemedir, true, "index.htm", true, true, "pagefilename"); ?><br />
+<input type="submit" value="Open file" />
+</fieldset>
+</form>
+
+<?php
+// Get the theme file.
+
+// First, make sure that the menu variable is blank.
+$themecontent = "";
+
+// Now, detect the theme file requested.
+$themefile = makesafe($_POST["pagefilename"], false, false);
+
+// Make sure that the string isn't blank.
+if (strlen($themefile)) {
+	// Check that the file exists...
+	if (file_exists($websitethemedir . $themefile)) {
+		// If it does, open and read the file.
+		$file = fopen($websitethemedir . $themefile, "r");
+	
+		while (!feof($file))
+		{
+			$themecontent = $themecontent . rtrim(fgets($file)) . "\n";
+		}
+	
+		fclose($file);
+		// Chop any extra whitespace off the theme content
+		$themecontent = trim($themecontent);
+		// Replace all &'s with &amp;
+		$themecontent = str_replace("&", "&amp;", $themecontent);
+		// Replace all /'s with... well, /'s - but the hex value thereof, so </textarea>'s won't end the editing space.
+		$themecontent = str_replace("/", "&#x2F;", $themecontent);
+		
+		// Echo the theme editor.
+		echo("<form action=\"action.php\" method=\"post\">
+<fieldset>
+<input type=\"hidden\" name=\"action\" value=\"edittheme\" />
+<input type=\"hidden\" name=\"themefilename\" value=\"" . $themefile . "\" />
+<textarea name=\"content\" cols=\"80\" rows=\"25\">" . $themecontent . "</textarea><br />
+<input type=\"submit\" value=\"Edit theme\" />");
+	}
+	
+	else {
+		// If it doesn't, return an error.
+		$themecontent = "File could not be found!";
+	}
+}
+?>

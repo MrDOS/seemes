@@ -18,43 +18,24 @@ This software is released under the GPL licence. Please see gpl.txt.
 <form action="action.php" method="post">
 <fieldset>
 <input type="hidden" name="action" value="deletepage" />
-<label for="pagefilename">Page name:</label><br />
 <?php
 
-// List the pages. We can't use listpages() in this instance because listpages() automatically echoes everything, and we need to have the raw list so we can remove the home page from it before we echo it.
-
-// Get the filenames.
-$filename = glob($websitedatadir . "*" . $websitedataextension);
-
-// Make sure there are some files...
-if (count($filename) > 1) {
-	for ($i = 0; $i < count($filename); $i++) {
-		// Chop $datadir off the filename.
-		$filename[$i] = substr($filename[$i], strlen($websitedatadir), strlen($filename[$i]) - strlen($websitedatadir));
-		// Now remove the file extension.
-		$filename[$i] = substr($filename[$i], 0, strlen($filename[$i]) - strlen($websitedataextension));
-	}
-	
-	// Now remove index.htm.
-	$websitedefaultpageindex = array_search($websitedefaultpage, $filename);
-	if ($websitedefaultpageindex !== false) {
-		unset($filename[$websitedefaultpageindex]);
-	}
-
-	// Echo the dropdown list.
+$deletepages = listpages($websitedatadir, "home", false, false, "");
+if (count($deletepages) >= 1) {
+	echo("<label for=\"pagefilename\">Page name:</label><br />");
 	echo("<select name=\"pagefilename\" id=\"pagefilename\">\n");
-	foreach ($filename as $filename) {
+	foreach ($deletepages as $filename) {
 		echo("<option value=\"" . $filename . "\">" . $filename . "</option>\n");
 	}
 	echo("</select><br />\n");
-	echo("<input type=\"submit\" value=\"Delete page\" />");
+	echo("<input type=\"submit\" value=\"Delete page\" />\n");
 }
 else {
-	echo("<span id=\"pagefilename\">There are no pages to delete!</span>");
+	echo("No pages to delete!");
 }
 
 ?>
 </fieldset>
 </form>
 <br />
-<div style="background-color: #ffe0e0; border: 1px solid #ff0000; color: #000000"><b>Please note:</b> This is <i>permanent</i>! It is impossible to reverse the deletion process. If you want the page back, you'll have to type it all out again or restore from a backup.</div>
+<div style="background-color: #ffe0e0; border: 1px solid #ff0000; color: #000000; padding: 4px;"><b>Please note:</b> This is <i>permanent</i>! It is impossible to reverse the deletion process. If you want the page back, you'll have to type it all out again or restore from a backup.</div>

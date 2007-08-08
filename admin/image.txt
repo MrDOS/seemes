@@ -1,0 +1,81 @@
+<h2>Image manager</h2>
+<?php
+
+/*
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: fileimage.txt
+Description: Admin Control Panel module; image manager.
+
+*/
+
+?>
+<p>Uploaded files are placed in the directory <code><?php echo($websiteimagedir); ?></code>. File listing:</p>
+<pre>
+<?php
+
+$listfiles = listfiles($websiteimagedir, true, "index.htm", false, false, "");
+
+if (count($listfiles) >= 1) {
+	foreach ($listfiles as $filename) {
+		echo("<a href=\"" . $websiteuploaddir . $filename . "\">" . $filename . "</a>\n");
+	}
+}
+else {
+	echo("No images found!\n");
+}
+
+?>
+</pre>
+
+<h3>Upload file</h3>
+<form action="action.php" enctype="multipart/form-data" method="post">
+<fieldset>
+<input type="hidden" name="action" value="uploadfile" />
+<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+<label for="uploadfilename">File to upload:</label><br />
+<input type="file" name="filename" id="uploadfilename" /><br />
+<input type="submit" value="Upload file" />
+</fieldset>
+</form>
+
+<h3>Delete file</h3>
+<form action="action.php" method="post">
+<fieldset>
+<input type="hidden" name="action" value="deletefile" />
+<?php
+
+$deletefiles = listfiles($websiteuploaddir, true, "index.htm", false, false, "");
+if (count($deletefiles) >= 1) {
+	echo("<label for=\"deletefilename\">File to delete:</label><br />");
+	echo("<select name=\"filename\" id=\"deletefilename\">\n");
+	foreach ($deletefiles as $filename) {
+		echo("<option value=\"" . $filename . "\">" . $filename . "</option>\n");
+	}
+	echo("</select><br />\n");
+	echo("<input type=\"submit\" value=\"Delete file\" />\n");
+}
+else {
+	echo("No files to delete!");
+}
+
+?>
+</fieldset>
+</form>
+<br />
+<div style="background-color: #ffe0e0; border: 1px solid #ff0000; color: #000000; padding: 4px;"><b>Please note:</b> This is <i>permanent</i>! It is impossible to reverse the deletion process. If you want the file back, you'll have to upload the file again or restore from a backup.</div>
+
+<h3>Move File</h3>
+<form action="action.php" method="post">
+<fieldset>
+<input type="hidden" name="action" value="movefile" />
+<label for="currentfilename">Current filename:</label><br />
+<?php listfiles($websiteuploaddir, true, "index.htm", true, true, "currentfilename"); ?><br />
+<label for="newfilename">New filename:</label><br />
+<input type="text" name="newfilename" id="newfilename" /><br />
+<input type="submit" value="Move file" />
+</fieldset>
+</form>
