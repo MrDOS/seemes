@@ -16,7 +16,7 @@ Description: Admin Control Panel module; edit a theme file.
 <form action="admin.php?page=edittheme" method="post">
 <fieldset>
 <label for="themefilename">Theme filename:</label><br />
-<?php listfiles($websitethemedir, true, "index.htm", true, true, "pagefilename"); ?><br />
+<?php listfiles($websitethemedir, true, "index.htm", true, true, "themefilename"); ?><br />
 <input type="submit" value="Open file" />
 </fieldset>
 </form>
@@ -28,7 +28,7 @@ Description: Admin Control Panel module; edit a theme file.
 $themecontent = "";
 
 // Now, detect the theme file requested.
-$themefile = makesafe($_POST["pagefilename"], false, false);
+$themefile = makesafe($_POST["themefilename"], false, false);
 
 // Make sure that the string isn't blank.
 if (strlen($themefile)) {
@@ -56,7 +56,9 @@ if (strlen($themefile)) {
 <input type=\"hidden\" name=\"action\" value=\"edittheme\" />
 <input type=\"hidden\" name=\"themefilename\" value=\"" . $themefile . "\" />
 <textarea name=\"content\" cols=\"80\" rows=\"25\">" . $themecontent . "</textarea><br />
-<input type=\"submit\" value=\"Edit theme\" />");
+<input type=\"submit\" value=\"Edit theme\" />
+</fieldset>
+</form>");
 	}
 	
 	else {

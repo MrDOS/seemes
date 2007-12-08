@@ -21,12 +21,15 @@ Description: Default theme.
 <?php echo($headextra); ?>
 </head>
 <body<?php echo($bodyextra); ?>>
-<div id="container">
+<div id="outercontainer">
 <div id="header">
 <h1><?php echo($websitename); ?></h1>
 </div>
+<div id="innercontainer">
 <div id="menu">
+<ul>
 <?php echo($menu); ?>
+</ul>
 </div>
 <div id="main">
 <?php include($page); ?>
@@ -34,7 +37,8 @@ Description: Default theme.
 </div>
 </div>
 <div id="footer">
-<p><?php echo($websitecopyright); ?> &bull; Powered by <b>Seemes</b> version <?php echo($seemesversion); ?> &bull; Page generated in <?php echo(timerreturn($starttime)); ?> seconds</p>
+<p><?php echo($websitecopyright); ?> &bull; Powered by <a href="http://seemes.org/">Seemes</a> version <?php echo($seemesversion); ?> &bull; Page generated in <?php echo(timerreturn($starttime)); ?> seconds</p>
+</div>
 </div>
 </body>
 </html>

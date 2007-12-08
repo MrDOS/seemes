@@ -1,2 +1,3 @@
  onload="if(document.getElementById('content')){showPreview('content', 'htmlpreview')}"
+
 <script type="text/javascript" src="js/htmlpreview.js"></script>

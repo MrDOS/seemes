@@ -29,45 +29,65 @@ $pagefilename = trim($_POST["pagefilename"]);
 if ($pagefilename != "") {
 	// Get the full path for the page
 	$pagefilepath = getpage($pagefilename, $websitedatadir);
+	
 	// Make sure the page exists...
 	if (file_exists($pagefilepath)) {
 		// Now get the page name and content.
 		$file = fopen($pagefilepath, "r");
 		$pagename = trim(fgetss($file, 1024));
+		
 		// Make sure $content is blank.
 		$content = "";
 		while (!feof($file)) {
 			$content = $content . fgets($file);
 		}
 		fclose($file);
+		
 		// Chop any extra whitespace off the page content
 		$content = trim($content);
-		// Replace all &'s with &amp;
-		$content = str_replace("&", "&amp;", $content);
-		// Replace all /'s with... well, /'s - but the hex value thereof, so </textarea>'s won't end the editing space.
-		$content = str_replace("/", "&#x2F;", $content);
+		// Replace all HTML characters with their special entities.
+		$content = htmlentities($content);
 		// Get the extras
 		$extra = getextra($pagefilepath, $websitedatadir);
-		$bodyextra = trim($extra[0]);
-		$headextra = trim($extra[1]);
-		// Change the "'s in $bodyextra to &quot; so the form'll handle it right
-		$bodyextra = str_replace("\"", "&quot;", $bodyextra);
+		$bodyextra = htmlentities(trim($extra[0]));
+		$pagetheme = trim($extra[1]);
+		$headextra = htmlentities(trim($extra[2]));
+		
+		if ($pagetheme == "") {
+			$pagetheme = "website default";
+		}
+		else {
+			$pagetheme = "<code>" . $pagetheme . "</code>";
+		}
+		
 		echo("<form action=\"action.php\" method=\"post\">\n");
-		echo("<fieldset>");
+		echo("<fieldset>\n");
+		echo("<legend>Page stuff</legend>\n");
 		echo("<input type=\"hidden\" name=\"action\" value=\"editpage\" />\n");
 		echo("<input type=\"hidden\" name=\"pagefilename\" value=\"" . $pagefilename . "\" />\n");
 		echo("<label for=\"pagename\">Page name:</label><br />\n");
 		echo("<input type=\"text\" name=\"pagename\" id=\"pagename\" style=\"width: 400px;\" value=\"" . $pagename . "\" /><br />\n");
-		echo("</fieldset>\n");
-		echo("<fieldset>\n");
 		echo("<label for=\"content\">Content:</label><br />\n");
 		echo("<textarea name=\"content\" id=\"content\" cols=\"80\" rows=\"25\" onkeyup=\"showPreview('content', 'htmlpreview')\">" . $content . "</textarea><br />\n");
 		echo("Live preview:<br />");
 		echo("<div id=\"htmlpreview\" style=\"border: 1px solid #d0d0d0; background-color: #ffffff; color: #000000;\"><p style=\"color: #c0c0c0;\">Your live preview will appear here, if you have JavaScript enabled.</p></div>");
+		echo("</fieldset>");
+		echo("<fieldset>");
+		echo("<legend>Extra stuff</legend>\n");
 		echo("<label for=\"headextra\">Extra header (optional):</label><br />\n");
 		echo("<textarea name=\"headextra\" id=\"headextra\" cols=\"80\" rows=\"5\">" . $headextra . "</textarea><br />\n");
 		echo("<label for=\"bodyextra\">Extra <code>&lt;body&gt;</code> tag content (<code>onload</code>, etc.) (optional):</label><br />\n");
 		echo("<input type=\"text\" name=\"bodyextra\" id=\"bodyextra\" style=\"width: 400px;\" value=\"" . $bodyextra . "\" /><br />\n");
+		$themefiles = listfiles($websitethemedir, true, "index.htm", false, false, "");
+		echo("<label for=\"pagetheme\">Page theme (currently " . $pagetheme . "):</label><br />");
+		echo("<select name=\"pagetheme\" id=\"pagetheme\">\n");
+		echo("<option value=\"\" selected=\"selected\">(Website default)</option>\n");
+		foreach ($themefiles as $filename) {
+			echo("<option value=\"" . $filename . "\">" . $filename . "</option>\n");
+		}
+		echo("</select><br />\n");
+		echo("</fieldset>");
+		echo("<fieldset>");
 		echo("<input type=\"submit\" value=\"Edit page\" />\n");
 		echo("</fieldset>");
 		echo("</form>");

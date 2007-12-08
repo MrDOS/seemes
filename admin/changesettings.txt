@@ -16,12 +16,12 @@ Description: Admin Control Panel module; change Seemes' settings.
 <form action="action.php" method="post">
 <fieldset>
 <input type="hidden" name="action" value="changesettings" />
-<label for="newwebsitename">Website name (current name is <b><?php echo($websitename); ?></b>):</label><br />
-<input type="text" name="newwebsitename" id="newwebsitename" value="" /><br />
-<label for="newwebsitecopyright">Website copyright (current copyright is <b><?php echo($websitecopyright); ?></b>):</label><br />
-<input type="text" name="newwebsitecopyright" id="newwebsitecopyright" value="" /><br />
-<label for="newwebsitetheme">Website theme (current theme is <b><?php echo($websitetheme); ?></b>):</label><br />
-<input type="text" name="newwebsitetheme" id="newwebsitetheme" value="" /><br />
+<label for="newwebsitename">Website name:</label><br />
+<input type="text" name="newwebsitename" id="newwebsitename" value="<?php echo($websitename); ?>" style="width: 400px;" /><br />
+<label for="newwebsitecopyright">Website copyright:</label><br />
+<input type="text" name="newwebsitecopyright" id="newwebsitecopyright" value="<?php echo(htmlentities($websitecopyright)); ?>" style="width: 400px;" /><br />
+<label for="newwebsitetheme">Website theme:</label><br />
+<input type="text" name="newwebsitetheme" id="newwebsitetheme" value="<?php echo($websitetheme); ?>" style="width: 400px;" /><br />
 <label for="newwebsitepassword">Administrator password (only enter if you want to change it):</label><br />
 <input type="password" name="newwebsitepassword" id="newwebsitepassword" value="" /><br />
 <label for="newwebsitepasswordverify">Administrator password (again, the same, and only enter if you want to change it):</label><br />

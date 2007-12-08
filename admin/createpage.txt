@@ -19,6 +19,7 @@ Description: Admin Control Panel module; create a new page.
 </pre>
 <form action="action.php" method="post">
 <fieldset>
+<legend>Page stuff</legend>
 <input type="hidden" name="action" value="createpage" />
 <label for="pagefilename">Page filename (alphanumeric only, no file extention):</label><br />
 <input type="text" name="pagefilename" id="pagefilename" style="width: 400px;" /><br />
@@ -30,12 +31,26 @@ Live preview:<br />
 <div id="htmlpreview" style="border: 1px solid #d0d0d0; background-color: #ffffff; color: #000000;"><p style="color: #c0c0c0;">Your live preview will appear here, if you have JavaScript enabled.</p></div>
 </fieldset>
 <fieldset>
+<legend>Extra stuff</legend>
 <label for="headextra">Extra header (optional):</label><br />
 <textarea name="headextra" id="headextra" cols="80" rows="5"></textarea><br />
 <label for="bodyextra">Extra <code>&lt;body&gt;</code> tag content (<code>onload</code>, etc.) (optional):</label><br />
 <input type="text" name="bodyextra" id="bodyextra" style="width: 400px;" /><br />
+<?php
+
+$themefiles = listfiles($websitethemedir, true, "index.htm", false, false, "");
+echo("<label for=\"pagetheme\">Page theme:</label><br />");
+echo("<select name=\"pagetheme\" id=\"pagetheme\">\n");
+echo("<option value=\"\" selected=\"selected\">(Website default)</option>\n");
+foreach ($themefiles as $filename) {
+	echo("<option value=\"" . $filename . "\">" . $filename . "</option>\n");
+}
+echo("</select><br />\n");
+
+?>
 </fieldset>
 <fieldset>
+<legend>Menu stuff</legend>
 <input type="radio" name="menutype" value="normal" id="normal" checked="checked" /><label for="normal">Add page to menu (default)</label><br />
 <input type="radio" name="menutype" value="nomenu" id="nomenu" /><label for="nomenu">Don't add page to menu</label><br />
 <input type="radio" name="menutype" value="bullet" id="bullet" /><label for="bullet">Add page to menu as a bullet</label><br />

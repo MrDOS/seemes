@@ -11,17 +11,27 @@ Filename: functions.htm
 Description: Seemes CMS documentation; built-in functions reference.
 
 -->
-<title>Seemes CMS 0.3 - Documentation - System Functions</title>
+<title>Seemes CMS 0.4 Beta 1 - Documentation - System Functions</title>
 <link rel="stylesheet" href="style.css" type="text/css" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 </head>
 <body>
-<h1>Seemes CMS 0.3 - Documentation</h1>
+<div id="main">
+<h1>Seemes CMS 0.4 Beta 1 - Documentation</h1>
+<div class="docbox"><a href="readme.htm">Readme</a></div>
+<div class="docbox"><a href="whatsnew.htm">What's New</a></div>
+<div class="docbox"><a href="install.htm">Installation</a></div>
+<div class="docbox"><a href="upgrade.htm">Upgrading</a></div>
+<div class="docbox"><a href="basicusage.htm">Basic Usage</a></div>
+<div class="docbox"><a href="advancedusage.htm">Advanced Usage</a></div>
+<div class="docbox"><a href="theming.htm">Theming</a></div>
+<div class="docbox currentdoc"><a href="functions.htm">Functions</a></div>
+<br style="clear: both;" />
 <h2>System Functions</h2>
 <hr />
 <h4>Introduction</h4>
 <p>This document provides an overview of the functions found in <code>functions.php</code>, including an overview of what each one does and its syntax.</p>
-<p><i>Please note:</i> This will probably only be useful to those who are tring to mod Seemes or just figure out how it works. If you don't fit into one of the above categories, this will probably put you to sleep.</p>
+<p><em>Please note:</em> This will probably only be useful to those who are tring to mod Seemes or just figure out how it works. If you don't fit into one of the above categories, this will probably put you to sleep.</p>
 <hr />
 <h4>The functions</h4>
 <p>Functions are listed in alphabetical order.</p>
@@ -38,49 +48,51 @@ Description: Seemes CMS documentation; built-in functions reference.
 <hr />
 <div style="margin-left: 4em;">
 <h4 class="functionname"><a name="getextra">getextra</a></h4>
-<p><b>Syntax:</b> <code><span style="color: #ff0000;">getextra</span>(<span style="color: #0060c0;">$page</span>, <span style="color: #0060c0;">$datadir</span>);</code><br />
-<b>Returns:</b> array (2 items)</p>
-<p><b>Purpose:</b> Finds (and returns) extra page content (extra stuff to go in <code>&lt;head&gt;</code>, e.g. scripts and stuff that actually goes inside of the <code>&lt;body&gt;</code> tag for things such as <code>&lt;onload()&gt;</code>).</p>
+<p><strong>Syntax:</strong> <code><span style="color: #ff0000;">getextra</span>(<span style="color: #0060c0;">$page</span>, <span style="color: #0060c0;">$datadir</span>);</code><br />
+<strong>Returns:</strong> array (3 items)</p>
+<p><strong>Purpose:</strong> Finds (and returns) extra page content (extra stuff to go in <code>&lt;head&gt;</code>, e.g. scripts, stuff that actually goes inside of the <code>&lt;body&gt;</code> tag for things such as <code>&lt;onload()&gt;</code>, and the page-specific theme). Returns extra <code>&lt;body&gt;</code> content in the first array entry, the name of the theme (if any) in the second array entry, and extra <code>&lt;head&gt;</code> content in the third.</p>
 <hr />
 <h4 class="functionname"><a name="getmenu">getmenu</a></h4>
-<p><b>Syntax:</b> <code><span style="color: #ff0000;">getmenu</span>(<span style="color: #0060c0;">$datadir</span>, <span style="color: #0060c0;">$phpfile</span>);</code><br />
-<b>Returns:</b> string</p>
-<p><b>Purpose:</b> Finds the menu file in any given directory and parses the menu for said directory. ($phpfile is the PHP file to use in the link.). Returns the formatted items in a single string.</p>
+<p><strong>Syntax:</strong> <code><span style="color: #ff0000;">getmenu</span>(<span style="color: #0060c0;">$datadir</span>, <span style="color: #0060c0;">$phpfile</span>);</code><br />
+<strong>Returns:</strong> string</p>
+<p><strong>Purpose:</strong> Finds the menu file in any given directory and parses the menu for said directory. ($phpfile is the PHP file to use in the link.). Returns the formatted items in a single string.</p>
 <hr />
 <h4 class="functionname"><a name="getpage">getpage</a></h4>
-<p><b>Syntax:</b> <code><span style="color: #ff0000;">getpage</span>(<span style="color: #0060c0;">$page</span>, <span style="color: #0060c0;">$datadir</span>);</code><br />
-<b>Returns:</b> string</p>
-<p><b>Purpose:</b> Generates a path to a data file relative to <code>index.php</code>. Arguments are the name of the file and the data folder. (Data extension is pulled from <code>config.php</code> automatically.)</p>
+<p><strong>Syntax:</strong> <code><span style="color: #ff0000;">getpage</span>(<span style="color: #0060c0;">$page</span>, <span style="color: #0060c0;">$datadir</span>);</code><br />
+<strong>Returns:</strong> string</p>
+<p><strong>Purpose:</strong> Generates a path to a data file relative to <code>index.php</code>. Arguments are the name of the file and the data folder. (Data extension is pulled from <code>config.php</code> automatically.)</p>
 <hr />
 <h4 class="functionname"><a name="getpagename">getpagename</a></h4>
-<p><b>Syntax:</b> <code><span style="color: #ff0000;">getpagename</span>(<span style="color: #0060c0;">$page</span>);</code><br />
-<b>Returns:</b> string</p>
-<p><b>Purpose:</b> Opens a data file and retrieves the page name from the first line of the file (after stripping any HTML tags). Requires a path, not just a filename.</p>
+<p><strong>Syntax:</strong> <code><span style="color: #ff0000;">getpagename</span>(<span style="color: #0060c0;">$page</span>);</code><br />
+<strong>Returns:</strong> string</p>
+<p><strong>Purpose:</strong> Opens a data file and retrieves the page name from the first line of the file (after stripping any HTML tags). Requires a path, not just a filename.</p>
 <hr />
 <h4 class="functionname"><a name="listfiles">listfiles</a></h4>
-<p><b>Syntax:</b> <code><span style="color: #ff0000;">listfiles</span>(<span style="color: #0060c0;">$datadir</span>, <span style="color: #0060c0;">$removefolders</span>, <span style="color: #0060c0;">$filestoremove</span>, <span style="color: #0060c0;">$showresults</span>, <span style="color: #0060c0;">$dropdownlist</span>, <span style="color: #0060c0;">$dropdownid</span>);</code><br />
-<b>Returns:</b> nothing or array</p>
-<p><b>Purpose:</b> Lists all files in directory <code>$datadir</code>. <code>$removefolders</code> is a boolean variable that indicates whether or not folders should be removed from the output. <code>$filestoremove</code> indicates what files (if any) should be removed from the output (single files should be passed as a string, and multiple files as an array). <code>$showresults</code> is a boolean variable that indicates wether or not the results should be echo'd directly; if false, the function will return an array of all the files. If <code>$dropdownlist</code> (and <code>$showfiles</code>) is true, it will return a <code>&lt;select&gt;</code> element containing the items. <code>$dropdownid</code> is the ID and name to be given the <code>&lt;select&gt;</code>.</p>
+<p><strong>Syntax:</strong> <code><span style="color: #ff0000;">listfiles</span>(<span style="color: #0060c0;">$datadir</span>, <span style="color: #0060c0;">$removefolders</span>, <span style="color: #0060c0;">$filestoremove</span>, <span style="color: #0060c0;">$showresults</span>, <span style="color: #0060c0;">$dropdownlist</span>, <span style="color: #0060c0;">$dropdownid</span>);</code><br />
+<strong>Returns:</strong> nothing or array</p>
+<p><strong>Purpose:</strong> Lists all files in directory <code>$datadir</code>. <code>$removefolders</code> is a boolean variable that indicates whether or not folders should be removed from the output. <code>$filestoremove</code> indicates what files (if any) should be removed from the output (single files should be passed as a string, and multiple files as an array). <code>$showresults</code> is a boolean variable that indicates wether or not the results should be echo'd directly; if false, the function will return an array of all the files. If <code>$dropdownlist</code> (and <code>$showfiles</code>) is true, it will return a <code>&lt;select&gt;</code> element containing the items. <code>$dropdownid</code> is the ID and name to be given the <code>&lt;select&gt;</code>.</p>
 <hr />
 <h4 class="functionname"><a name="listpages">listpages</a></h4>
-<p><b>Syntax:</b> <code><span style="color: #ff0000;">listfiles</span>(<span style="color: #0060c0;">$datadir</span>, <span style="color: #0060c0;">$pagestoremove</span>, <span style="color: #0060c0;">$showresults</span>, <span style="color: #0060c0;">$dropdownlist</span>, <span style="color: #0060c0;">$dropdownid</span>);</code><br />
-<b>Returns:</b> nothing or array</p>
-<p><b>Purpose:</b> Lists all pages in directory <code>$datadir</code>. <code>$pagestoremove</code> indicates what pages (if any) should be removed from the output (single pages should be passed as a string, and multiple files as an array). <code>$showresults</code> is a boolean variable that indicates wether or not the results should be echo'd directly; if false, the function will return an array of all the files. If <code>$dropdownlist</code> is true, it will return a <code>&lt;select&gt;</code> element containing the items. <code>$dropdownid</code> is the ID and name to be given the <code>&lt;select&gt;</code>.</p>
+<p><strong>Syntax:</strong> <code><span style="color: #ff0000;">listfiles</span>(<span style="color: #0060c0;">$datadir</span>, <span style="color: #0060c0;">$pagestoremove</span>, <span style="color: #0060c0;">$showresults</span>, <span style="color: #0060c0;">$dropdownlist</span>, <span style="color: #0060c0;">$dropdownid</span>);</code><br />
+<strong>Returns:</strong> nothing or array</p>
+<p><strong>Purpose:</strong> Lists all pages in directory <code>$datadir</code>. <code>$pagestoremove</code> indicates what pages (if any) should be removed from the output (single pages should be passed as a string, and multiple files as an array). <code>$showresults</code> is a boolean variable that indicates wether or not the results should be echo'd directly; if false, the function will return an array of all the files. If <code>$dropdownlist</code> is true, it will return a <code>&lt;select&gt;</code> element containing the items. <code>$dropdownid</code> is the ID and name to be given the <code>&lt;select&gt;</code>.</p>
 <hr />
 <h4 class="functionname"><a name="makesafe">makesafe</a></h4>
-<p><b>Syntax:</b> <code><span style="color: #ff0000;">makesafe</span>(<span style="color: #0060c0;">$unsafestring</span>, <span style="color: #0060c0;">$removeslashes</span>, <span style="color: #0060c0;">$removeperiods</span>);</code><br />
-<b>Returns:</b> string</p>
-<p><b>Purpose:</b> Makes a given string "safe" by removing special HTML characters (<code>&lt;</code>, <code>&gt;</code>, etc.), any instances of <code>http://</code>, and adding magic slashes (i.e. <code>"</code> and <code>'</code> become <code>/"</code> and <code>/'</code>, respectively). If <code>$removeslashes</code> is <code>true</code>, it will remove any forward slashes (<code>/</code>). If <code>$removeperiods</code> is <code>true</code>, it will remove any periods (<code>.</code>).</p>
+<p><strong>Syntax:</strong> <code><span style="color: #ff0000;">makesafe</span>(<span style="color: #0060c0;">$unsafestring</span>, <span style="color: #0060c0;">$removeslashes</span>, <span style="color: #0060c0;">$removeperiods</span>);</code><br />
+<strong>Returns:</strong> string</p>
+<p><strong>Purpose:</strong> Makes a given string "safe" by removing special HTML characters (<code>&lt;</code>, <code>&gt;</code>, etc.), any instances of <code>http://</code>, and adding magic slashes (i.e. <code>"</code> and <code>'</code> become <code>/"</code> and <code>/'</code>, respectively). If <code>$removeslashes</code> is <code>true</code>, it will remove any forward slashes (<code>/</code>). If <code>$removeperiods</code> is <code>true</code>, it will remove any periods (<code>.</code>).</p>
+<hr />
 <h4 class="functionname"><a name="timerreturn">timerreturn</a></h4>
-<p><b>Syntax:</b> <code><span style="color: #ff0000;">timerreturn</span>(<span style="color: #0060c0;">$starttime</span>);</code><br />
-<b>Returns:</b> string</p>
-<p><b>Purpose:</b> Returns the amount of time from <code>$starttime</code> to present. This fuction is used internally for measuring page load time. <code>$starttime</code> is also the name of the variable that stores the time when the page is loaded. (It is initialized in <code>index.php</code>, <code>admin.php</code>, <code>action.php</code>, and <code>login.php</code>.) The start time is initialized like this:</p>
+<p><strong>Syntax:</strong> <code><span style="color: #ff0000;">timerreturn</span>(<span style="color: #0060c0;">$starttime</span>);</code><br />
+<strong>Returns:</strong> string</p>
+<p><strong>Purpose:</strong> Returns the amount of time from <code>$starttime</code> to present. This fuction is used internally for measuring page load time. <code>$starttime</code> is also the name of the variable that stores the time when the page is loaded. (It is initialized in <code>index.php</code>, <code>admin.php</code>, <code>action.php</code>, and <code>login.php</code>.) The start time is initialized like this:</p>
 <pre>$currenttime = microtime();
 $currenttime = explode(" ", $currenttime);
 $currenttime = $currenttime[0] + $currenttime[1];
 $starttime = $currenttime;</pre>
 <hr />
 </div>
-<p id="footer"><b>Seemes CMS</b> is copyright 2007 MagicWare, and is released under the GNU General Public Licence 2.0.</p>
+<p id="footer"><strong>Seemes CMS</strong> is &copy;2007 MagicWare, and is released under the GNU General Public Licence 2.</p>
+</div>
 </body>
 </html>

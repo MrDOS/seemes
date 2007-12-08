@@ -1,3 +1,3 @@
 <h2>Home</h2>
-<p>Welcome to your new installation of Seemes CMS, a new Open Source content management system.</p>
+<p>Welcome to your new installation of Seemes CMS, a databaseless Open Source content management system.</p>
 <p>Just in case you're wondering, your Admin Control Panel is <a href="<?php echo($websiteadminindex); ?>.php">here</a>.</p>

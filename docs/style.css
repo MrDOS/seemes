@@ -16,8 +16,10 @@ body {
 	font-size: 11pt;
 }
 
-code {
+code, pre {
 	background-color: #f0f0f0;
+	color: #000000;
+	font-family: "Lucida Console", courier;
 }
 
 div#menu {
@@ -29,8 +31,19 @@ div#menu a {
 	display: block;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	font-family: "Georgia", serif;
+div.currentdoc {
+	background-color: #e0e0e0 !important;
+	color: #000000;
+	font-weight: bold;
+}
+
+div.docbox {
+	background-color: #f0f0f0;
+	color: #000000;
+	float: left;
+	margin: .25em;
+	padding: .5em;
+	width: 192px;
 }
 
 h1 {
@@ -50,11 +63,15 @@ h4 {
 }
 
 h4.functionname {
-	font-family: "courier new", courier;
+	font-family: "Lucida Console", courier;
+}
+
+h5 {
+	font-size: 12pt;
 }
 
 li {
-	margin-bottom: .5em;
+	margin: .5em 0px;
 }
 
 p#footer {

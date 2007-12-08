@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<!--
+
+Please see gpl.txt for licence and disclaimer of warranty.
+
+Seemes CMS
+Copyright 2007 MagicWare
+Filename: installation.htm
+Description: Seemes CMS documentation; installation instructions.
+
+-->
+<title>Seemes CMS 0.4 Beta 1 - Documentation - Installation</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+</head>
+<body>
+<div id="main">
+<h1>Seemes CMS 0.4 Beta 1 - Documentation</h1>
+<div class="docbox"><a href="readme.htm">Readme</a></div>
+<div class="docbox"><a href="whatsnew.htm">What's New</a></div>
+<div class="docbox currentdoc"><a href="install.htm">Installation</a></div>
+<div class="docbox"><a href="upgrade.htm">Upgrading</a></div>
+<div class="docbox"><a href="basicusage.htm">Basic Usage</a></div>
+<div class="docbox"><a href="advancedusage.htm">Advanced Usage</a></div>
+<div class="docbox"><a href="theming.htm">Theming</a></div>
+<div class="docbox"><a href="functions.htm">Functions</a></div>
+<br style="clear: both;" />
+<h2>Installation</h2>
+<hr />
+<p>Installation should be relatively quick and simple. To complete it with minimal difficulty, please follow the steps below:</p>
+<ol>
+<li>Upload all the files in the archive to your webserver.</li>
+<li><code>CHMOD</code> the following:
+<ul>
+<li>The folder that Seemes is in: <code>0777</code></li>
+<li>The folder <code>data/</code>: <code>0777</code></li>
+<li>The folder <code>files/</code>: <code>0777</code></li>
+<li>The folder <code>img/</code>: <code>0777</code></li>
+<li>The folder <code>themes/</code>: <code>0777</code></li>
+</ul>
+</li>
+<li>Open (the uploaded copy of) <code>install/install1.php</code> in your browser. Optionally, browsing to the folder you've uploaded Seemes to will give you a link to the installer.</li>
+<li>Follow the steps.</li>
+<li>Now browse to the root of the folder you've installed to. Your website should be up and running.</li>
+<li><strong>Note:</strong> It is <em>highly recommended</em> that you delete the folder <code>install/</code> after the installation has completed. As far as we know, the scripts in it are secure, however, they have not been tested extensively, and should a vulnerability be found in them, an attacker could possibly reset your entire site configuration, including password!</li>
+</ol>
+<hr />
+<p id="footer"><strong>Seemes CMS</strong> is &copy;2007 MagicWare, and is released under the GNU General Public Licence 2.</p>
+</div>
+</body>
+</html>

@@ -17,19 +17,20 @@ $currenttime = explode(" ", $currenttime);
 $currenttime = $currenttime[0] + $currenttime[1];
 $starttime = $currenttime;
 
+// Make sure Seemes has been installed.
 if (!file_exists("config.php")) {
-	exit("<code>config.php</code> could not be found! Have you run <a href=\"install.php\">the installer</a>?");
+	die("<code>config.php</code> could not be found! Have you run <a href=\"install/install1.php\">the installer</a>?");
 }
 
 // Include Seemes configuration and functions.
 require("config.php");
 require("functions.php");
 
-// Get the requested page, first checking if a value for "page" was passed.
+// Get the requested page, first checking if a value for page was passed.
 $page = makesafe($_GET["page"], true, true);
 $requestedpage = $page;
 
-// Check if $page is blank. If so, use the default page.
+// Check if $page is blank. If it is, use the default page.
 if ($page == "") {
    $page = $websitedefaultpage;
 }
@@ -48,12 +49,18 @@ $pagename = getpagename($page);
 // Get the extras.
 $extras = getextra($page, $websitedatadir);
 $bodyextra = $extras[0];
-$headextra = $extras[1];
+$pagetheme = $extras[1];
+$headextra = $extras[2];
 
 // Get the menu
 $menu = getmenu($websitedatadir, $websiteindex);
 
 // Finally, include the theme.
-include($websitethemedir . $websitetheme);
+if ($pagetheme == "") {
+	include($websitethemedir . $websitetheme);
+}
+else {
+	include($websitethemedir . $pagetheme);
+}
 
 ?>

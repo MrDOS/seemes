@@ -1,0 +1,33 @@
+html {
+	background-color: #ffffff;
+	color: #000000;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 11pt;
+}
+
+div.currentstep {
+	background-color: #e0e0e0 !important;
+	color: #000000;
+	font-weight: bold;
+}
+
+div.stepbox {
+	background-color: #f0f0f0;
+	color: #000000;
+	float: left;
+	margin-right: .5em;
+	padding: .5em;
+	width: 192px;
+}
+
+input {
+	font-family: "Trebuchet MS", sans-serif;
+	margin-bottom: .5em;
+}
+
+td, th {
+	background-color: #f0f0f0;
+	color: #000000;
+	text-align: center;
+	width: 192px;
+}

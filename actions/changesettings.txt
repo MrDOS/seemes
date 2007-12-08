@@ -76,10 +76,9 @@ This software is released under the GPL licence. Please see gpl.txt.
 \$websiteheadersize = \"" . $websiteheadersize . "\"; // Size of page title headers.
 \$websiteimagedir = \"" . $websiteimagedir . "\"; // The image folder. MUST HAVE LEADING SLASH!
 \$websiteindex = \"" . $websiteindex . "\"; // The main PHP file.
-\$websitemenuidprefix = \"" . $websitemenuidprefix . "\"; // The prefix for each menu item's ID. This will be followed by the page filename, if $websitemenuids is true. (If $websitemenuids is false, this does nothing.)
-\$websitemenuids = " . $websitemenuids . "; // Turns menu item ID's on or off.
+\$websitemenuformatting = \"" . addslashes($websitemenuformatting) . "\"; // The formatting for menu items. This is explained further in docs/advancedusage.htm.
 \$websitename = \"" . $websitename . "\"; // The name of the site.
-\$websitepassword = \"" . $websitepassword . "\"; // The admin password, SHA-1 encrypted (default \"password\")
+\$websitepassword = \"" . $websitepassword . "\"; // The admin password, SHA-1 encrypted.
 \$websiteuploaddir = \"" . $websiteuploaddir . "\"; // The folder for uploads. MUST HAVE LEADING SLASH!
 \$websitetheme = \"" . $websitetheme . "\"; // The php file for the the template you want to use.
 \$websitethemedir = \"" . $websitethemedir . "\"; // The theme directory.

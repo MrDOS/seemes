@@ -11,16 +11,76 @@ Filename: whatsnew.htm
 Description: Seemes CMS documentation; what's new.
 
 -->
-<title>Seemes CMS 0.3 - Documentation - What's new</title>
+<title>Seemes CMS 0.4 Beta 1 - Documentation - What's new</title>
 <link rel="stylesheet" href="style.css" type="text/css" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 </head>
 <body>
-<h1>Seemes CMS 0.3 - Documentation</h1>
+<div id="main">
+<h1>Seemes CMS 0.4 Beta 1 - Documentation</h1>
+<div class="docbox"><a href="readme.htm">Readme</a></div>
+<div class="docbox currentdoc"><a href="whatsnew.htm">What's New</a></div>
+<div class="docbox"><a href="install.htm">Installation</a></div>
+<div class="docbox"><a href="upgrade.htm">Upgrading</a></div>
+<div class="docbox"><a href="basicusage.htm">Basic Usage</a></div>
+<div class="docbox"><a href="advancedusage.htm">Advanced Usage</a></div>
+<div class="docbox"><a href="theming.htm">Theming</a></div>
+<div class="docbox"><a href="functions.htm">Functions</a></div>
+<br style="clear: both;" />
 <h2>What's new</h2>
 <hr />
+<h3>Version 0.4 Beta 1</h3>
+<p><strong>Release date:</strong> 7 December, 2007</p>
+<h4>Version description</h4>
+<p>Seemes 0.4 Beta 1 is an update to Seemes 0.3, including bug fixes and feature updates.</p>
+<h4>New features</h4>
+<ul>
+<li>The installer has been rewritten. New features include:
+<ul>
+<li>Cleaner, 3-step installation process</li>
+<li>Permissions check before installation</li>
+</ul>
+</li>
+<li>The menu system has been rewritten to allow customization of menu output, as well as easier adding of other menu features down the road.</li>
+<li>The old theme has been replaced.</li>
+<li>You can now set themes for individual pages, as well as globally.</li>
+</ul>
+<h4>Bug fixes</h4>
+<ul>
+<li>Fixed incorrect handling of HTML entities when loading the extra content for page editing.</li>
+<li>When editing pages, <code>/</code>'s inside HTML comments no longer become <code>&amp;#x2F;</code>'s.</li>
+</ul>
+<h4>Things that'll break</h4>
+<ul>
+<li>Because of modifications to the way <code>extra</code> files (the files that store extra page-specific data, such as extra <code>&lt;head&gt;</code> data) have been reworked to allow for page-specific themes, old <code>extra</code> files will be incompatible with Seemes 0.4. Please see <a href="upgrading.htm">upgrading.htm</a> for upgrade instructions. To upgrade old <code>extra</code> files:
+<ol>
+<li>Download an <code>extra</code> file from your <code>data</code> folder to your computer.</li>
+<li>Open it in your favourite text editor. Notepad is probably not a good choice in this instance, because it won't handle line breaks properly if you've been using a *nix-based server.</li>
+<li>Your file should have a format something like this:
+<pre> onload="javascript:myFunction('foo', 42);"
+&lt;script type="text/javascript" /&gt;
+function myFunction(myString, myInt) {
+	alert(myString + myInt);
+}
+&lt;/script&gt;</pre>
+The first line indicates extra content inside the actual <code>&lt;body&gt;</code> tag. Everything after that is extra <code>&lt;head&gt;</code> content.</li>
+<li>Insert a blank line between line 1 and line 2, so your file looks like this:
+<pre> onload="javascript:myFunction('foo', 42);"
+
+&lt;script type="text/javascript" /&gt;
+function myFunction(myString, myInt) {
+	alert(myString + myInt);
+}
+&lt;/script&gt;</pre>
+The new line allows room to save data about what theme the page should use.</li>
+<li>Save the file and upload it.</li>
+<li>Now, repeat the process for all <code>extra</code> files.</li>
+</ol>
+</li>
+</ul>
+<hr />
 <h3>Version 0.3</h3>
-<p><b>Release date:</b> 7 August, 2007</p>
+<p><strong>Release date:</strong> 7 August, 2007</p>
 <h4>Version description</h4>
 <p>Seemes 0.3 is a full-version upgrade from Seemes 0.2, including bug fixes and feature updates, and is also the first 0.3 release marked as "stable."</p>
 <h4>New features</h4>
@@ -42,7 +102,7 @@ Description: Seemes CMS documentation; what's new.
 </ul>
 <hr />
 <h3>Version 0.2</h3>
-<p><b>Release date:</b> 7 July, 2007</p>
+<p><strong>Release date:</strong> 7 July, 2007</p>
 <h4>Version description</h4>
 <p>Seemes 0.2 is an update to Seemes 0.2 Beta 2, including bug fixes and feature updates, and is also the first 0.2 release marked as "stable."</p>
 <h4>New features</h4>
@@ -55,7 +115,7 @@ Description: Seemes CMS documentation; what's new.
 </ul>
 <hr />
 <h3>Version 0.2 Beta 2</h3>
-<p><b>Release date:</b> 7 June, 2007</p>
+<p><strong>Release date:</strong> 7 June, 2007</p>
 <h4>Version description</h4>
 <p>Seemes 0.2 Beta 2 is an update to Seemes 0.2 Beta 1, including bug fixes and feature updates.</p>
 <h4>New features</h4>
@@ -74,7 +134,7 @@ Description: Seemes CMS documentation; what's new.
 </ul>
 <hr />
 <h3>Version 0.2 Beta 1</h3>
-<p><b>Release date:</b> 25 March, 2007</p>
+<p><strong>Release date:</strong> 25 March, 2007</p>
 <h4>Version description</h4>
 <p>Seemes 0.2 Beta 1 is a complete rewrite of Seemes 0.1e.</p>
 <h4>New features</h4>
@@ -87,6 +147,7 @@ Description: Seemes CMS documentation; what's new.
 <li>Being a rewrite, no bugs from previous versions have been fixed.</li>
 </ul>
 <hr />
-<p id="footer"><b>Seemes CMS</b> is copyright 2007 MagicWare, and is released under the GNU General Public Licence 2.0.</p>
+<p id="footer"><strong>Seemes CMS</strong> is &copy;2007 MagicWare, and is released under the GNU General Public Licence 2.</p>
+</div>
 </body>
 </html>

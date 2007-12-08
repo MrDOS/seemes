@@ -22,6 +22,9 @@ function getextra($page, $datadir) {
 		// Read in the extra <body> content.
 		$bodyextra = rtrim(fgets($file));
 		
+		// Get the page theme (if any).
+		$pagetheme = rtrim(fgets($file));
+		
 		// Now read in the extra header data.
 		while (!feof($file)) {
 			$headextra = $headextra . fgets($file);
@@ -37,77 +40,123 @@ function getextra($page, $datadir) {
 	}
 	
 	// Return $bodyextra and $headextra
-	return array($bodyextra, $headextra);
+	return array($bodyextra, $pagetheme, $headextra);
 }
 
 function getmenu($datadir, $phpfile) {
 	// Get the website menu.
 	
 	// Get some necessary variables out of config.php.
-	global $websitemenuidprefix, $websitemenuids, $requestedpage;
+	global $websitemenuformatting, $requestedpage;
 	
 	// First, make sure that the menu variable is blank.
 	$menu = "";
+	
+	// Set the item number counter.
+	$menuitems = 0;
 	
 	// Check that the file exists...
 	if (file_exists($datadir . "menu.inc")) {
 		// If it does, open and read the file.
 		$pageread = fopen($datadir . "menu.inc", "r");
 		while (!feof($pageread)) {
-			$currentitem = trim(fgets($pageread));
-			// Now check to see if the first two characters of the name are (( (comment) or ** (bullet)
-			if (substr($currentitem, 0, 2) == "((" || $currentitem == "") {
-				// Comment or blank line, do nothing.
-			}
-			elseif (substr($currentitem, 0, 2) == "**") {
-				// Bullet, remove ** and add a &bull; symbol.
-				$currentitem = substr($currentitem, 2, strlen($currentitem) - 2);
-				$currentitempath = getpage($currentitem, $datadir);
-				$currentitemname = "&bull;&nbsp;" . getpagename($currentitempath);
-				$menu = $menu . "<a href=\"" . $phpfile . ".php?page=" . $currentitem . "\"";
-				// See if we need to assign an ID.
-				if ($websitemenuids == true) {
-					$menu = $menu . " id=\"" . $websitemenuidprefix . $currentitem . "\"";
+			// Read in the current item.
+			$currentitemraw = trim(fgets($pageread));
+			
+			// Now, parse the current item(s).
+			
+			// First, we reset all the menu variables to blank, just to be on the safe side.
+			$currentitemhref = array("");
+			$currentitemid = array("");
+			$currentitemname = array("");
+			
+			// Split the item up by |'s right from the start. This allows us to use extra controls on menu sub-items.
+			$currentitemraw = explode("|", $currentitemraw);
+			
+			// See if we should be doing sub-items at all.
+			$showsubitems = false;
+			foreach ($currentitemraw as $currentsubitem) {
+				$currentsubitem = explode("#", $currentsubitem);
+				$currentsubitem = $currentsubitem[0];
+				if ($currentsubitem == $requestedpage) {
+					$showsubitems = true;
 				}
-				$menu = $menu . ">" . $currentitemname . "</a>\n";
 			}
-			elseif (substr($currentitem, 0, 2) == "!!") {
-				$currentitem = substr($currentitem, 2, strlen($currentitem) - 2);
-				$currentitem = explode("!!", $currentitem);
-				$menu = $menu . "<a href=\"" . $currentitem[0] . "\">" . $currentitem[1] . "</a>";
+			
+			// Teh numero counter.
+			for ($i = 0; $i < count($currentitemraw); $i++) {
+				// Add one to the item number counter.
+				$menuitems++;
+				
+				// If the counter is greater than 0, we want to display a bullet first.
+				if ($i > 0) {
+					$currentitemname[$i] = "&bull;&nbsp;";
+				}
+				
+				// This if only lets us past if the counter is less than 1 or if we're allowed to show sub-items.
+				if ($i < 1 || $showsubitems) {
+					// Split it into two peices (one for the main page name, one for the in-page link (if any).
+					$currentitemsplit = explode("#", $currentitemraw[$i]);
+					// Put the current item in its own variable.
+					$currentitem[$i] = trim($currentitemsplit[0]);
+					// Put the in-page link in its own variable.
+					$currentiteminlink[$i] = trim($currentitemsplit[1]);
+					
+					// Is it a comment or a blank line?
+					if (substr($currentitem[$i], 0, 2) == "((" || $currentitem[$i] == "") {
+						// It is - do nothing.
+					}
+					// Okay, is it a bullet?
+					elseif (substr($currentitem[$i], 0, 2) == "**") {
+						// Yes. Replace the ** with &bull;.
+						$currentitem[$i] = substr($currentitem[$i], 2, strlen($currentitem[$i]) - 2);
+						$currentitempath = getpage($currentitem[$i], $datadir);
+						$currentitemname[$i] = $currentitemname[$i] . "&bull;&nbsp;" . getpagename($currentitempath);
+						$currentitemhref[$i] = $phpfile . ".php?page=" . $currentitem[$i];
+						$currentitemid[$i] = strtolower(str_replace(" ", "", $currentitem[$i]));
+					}
+					// Is it an absolute link?
+					elseif (substr($currentitem[$i], 0, 2) == "!!") {
+						$currentitem[$i] = substr($currentitem[$i], 2, strlen($currentitem[$i]) - 2);
+						$currentitem[$i] = explode("!!", $currentitem[$i]);
+						if ($currentitem[$i][1] != "") {
+							$currentitemhref[$i] = $currentitem[$i][0];
+							$currentitemname[$i] = $currentitemname[$i] . $currentitem[$i][1];
+						}
+						else {
+							$currentitemhref[$i] = $currentitem[$i][0];
+							$currentitemname[$i] = $currentitemname[$i] . $currentitem[$i][0];
+						}
+						$currentitemid[$i] = strtolower(str_replace(" ", "", $currentitemname[$i]));
+					}
+					// Or is it just plain and normal?
+					else {
+						// Oh goodie! However, we do have to check to see whether we're dealing with page-specific menu items or not, too...
+						
+						// Do the first item.
+						$currentitempath = getpage($currentitem[$i], $datadir);
+						$currentitemname[$i] = $currentitemname[$i] . getpagename($currentitempath);
+						$currentitemhref[$i] = $phpfile . ".php?page=" . $currentitem[$i];
+						$currentitemid[$i] = strtolower(str_replace(" ", "", $currentitem[$i]));
+					}
+				}
 			}
-			else {
-				// It's normal, be normal.
-				$currentitem = explode("|", $currentitem);
-				$currentitempath = getpage($currentitem[0], $datadir);
-				$currentitemname = getpagename($currentitempath);
-				$menu = $menu . "<a href=\"" . $phpfile . ".php?page=" . $currentitem[0] . "\"";
-				// See if we need to assign an ID.
-				if ($websitemenuids == true) {
-					$menu = $menu . " id=\"" . $websitemenuidprefix . $currentitem[0] . "\"";
-					
-					$menu = $menu . ">" . $currentitemname . "</a>\n";
-					
-					$currentmenuitem = false;
-					foreach($currentitem as $currentsubitem) {
-						if ($currentsubitem == $requestedpage) {
-							$currentmenuitem = true;
-						}
+			
+			// Alrighty. Now, let's throw together the menu entry - providing it's not blank, of course.
+			if ($currentitemhref[0] != "" && $currentitemname[0] != "" && $currentitemid[0] != "") {
+				// Set up a loop for the generation. This is really only used for page-specific menus.
+				for ($i = 0; $i < count($currentitemhref); $i++) {
+					if ($currentiteminlink[$i] != "") {
+						$currentitemhref[$i] = $currentitemhref[$i] . "#" . $curreniteminlink[$i];
 					}
-					if ($currentmenuitem == true) {
-						if (count($currentitem) > 1) {
-							for ($i = 1; $i < count($currentitem); $i++) {
-								$currentitempath = getpage($currentitem[$i], $datadir);
-								$currentitemname = "&bull;&nbsp;" . getpagename($currentitempath);
-								$menu = $menu . "<a href=\"" . $phpfile . ".php?page=" . $currentitem[$i] . "\"";
-								// See if we need to assign an ID.
-								if ($websitemenuids == true) {
-									$menu = $menu . " id=\"" . $websitemenuidprefix . $currentitem[$i] . "\"";
-								}
-							$menu = $menu . ">" . $currentitemname . "</a>\n";
-							}
-						}
-					}
+					
+					$currentitemfinal = $websitemenuformatting;
+					$currentitemfinal = str_replace("%menuhref%", $currentitemhref[$i], $currentitemfinal);
+					$currentitemfinal = str_replace("%menuid%", $currentitemid[$i], $currentitemfinal);
+					$currentitemfinal = str_replace("%menuname%", $currentitemname[$i], $currentitemfinal);
+					$currentitemfinal = str_replace("%menunumber%", $menuitems, $currentitemfinal);
+					
+					$menu = $menu . $currentitemfinal;
 				}
 			}
 		}
@@ -115,7 +164,7 @@ function getmenu($datadir, $phpfile) {
 	}
 	else {
 		// If it doesn't, return an error.
-		$menu = "Menu file, menu.inc, could not be found!";
+		$menu = "The menu file, menu.inc, could not be found!";
 	}
 	
 	// Return the menu contents.

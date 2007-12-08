@@ -1,72 +1,79 @@
 body {
-	background: url(../img/default/pageback.png) repeat #ffffff;
-	/* Comment out the next line if you want the page background to scroll with the page */
-	background-attachment: fixed;
+	background-color: #f0f0f0;
 	color: #000000;
 	font-family: "Trebuchet MS", sans-serif;
 	font-size: 12pt;
 	text-align: center;
+	margin: 0px;
 }
 
 code, pre {
-	font-family: "Lucida Monospaced", courier;
-}
-
-div#container {
-	background-color: #ffffff;
-	border: 1px solid #c0c0c0;
-	color: #000000;
-	margin: auto;
-	padding: 4px;
-	text-align: left;
-	/* Comment out the next line if you want the content width (plus margin) to be the same as that of the page */
-	width: 80%;
+	font-family: "Lucida Console", courier;
 }
 
 div#footer {
+	border-top: 1px solid #c0c0c0;
 	font-size: 8pt;
 	clear: both;
 }
 
-div#footer p:first-letter {
-	font-weight: normal;
-}
-
 div#header {
-	font-family: "Georgia", serif;
+	background-color: #f0f0f0;
+	border-bottom: 1px solid #c0c0c0;
+	color: #000000;
+	padding: 2em;
 	text-align: center;
 }
 
+div#header * {
+	margin: 0px;
+	padding: 0px;
+}
+
+div#innercontainer {
+	background-color: #ffffff;
+	color: #000000;
+	margin: auto;
+	padding: 0px 10% 1em 10%;
+	text-align: left;
+}
+
 div#main {
-	margin-left: 128px;
+	clear: both;
 }
 
 div#menu {
-	background-color: #c0c0c0;
-	color: #000000;
+	border-left: 1px solid #c0c0c0;
 	float: left;
-	font-family: "Georgia", serif;
-	margin: 0;
-	width: 124px;
+	margin-bottom: 1em;
+}
+
+div#menu * {
+	margin: 0px;
+	padding: 0px;
 }
 
 div#menu a {
-	background-color: transparent;
-	border: 1px solid;
-	border-color: #e0e0e0 #a0a0a0 #a0a0a0 #e0e0e0;
+	background-color: #ffffff;
+	border-bottom: 1px solid #c0c0c0;
+	border-right: 1px solid #c0c0c0;
 	color: #000000;
 	display: block;
-	padding: 4px;
-	text-decoration: none;
+	float: left;
+	font-size: 11pt;
+	padding: 8px;
 }
 
 div#menu a:hover {
-	border: 1px solid;
-	border-color: #a0a0a0 #e0e0e0 #e0e0e0 #a0a0a0;
+	background-color: #f8f8f8;
+	color: #000000;
+}
+
+div#menu li {
+	list-style: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: "Georgia", serif;
 }
 
 h1 {
@@ -106,7 +113,7 @@ input {
 }
 
 textarea {
-	font-family: "Lucida Monospaced", monospace;
+	font-family: "Lucida Console", monospace;
 	font-size: 10pt;
 }
 

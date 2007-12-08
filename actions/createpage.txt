@@ -20,6 +20,7 @@ $pagefilename = trim($_POST["pagefilename"]);
 $pagename = stripslashes(trim($_POST["pagename"]));
 $content = stripslashes(trim($_POST["content"]));
 $headextra = trim($_POST["headextra"]);
+$pagetheme = trim($_POST["pagetheme"]);
 $bodyextra = trim($_POST["bodyextra"]);
 $menutype = $_POST["menutype"];
 
@@ -38,12 +39,13 @@ if ($pagefilename != "") {
       chmod($pagefilepath, 0666);
       
       // See if there's any extra header.
-      if (strlen($headextra) > 0 or strlen($bodyextra) > 0) {
+      if ($headextra != "" || $pagetheme != "" || $bodyextra != "") {
          // Insert a space at the beggining of $bodyextra
          $bodyextra = " " . $bodyextra;
          // Write the file for "extras".
          $file = fopen($pagefilepath . ".extra", "w");
          fwrite($file, $bodyextra . "\n");
+         fwrite($file, $pagetheme . "\n");
          fwrite($file, $headextra);
          fclose($file);
       }

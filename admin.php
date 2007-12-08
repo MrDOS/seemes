@@ -17,6 +17,11 @@ $currenttime = explode(" ", $currenttime);
 $currenttime = $currenttime[0] + $currenttime[1];
 $starttime = $currenttime;
 
+// Make sure Seemes has been installed.
+if (!file_exists("config.php")) {
+	die("<code>config.php</code> could not be found! Have you run <a href=\"install/install1.php\">the installer</a>?");
+}
+
 // Include Seemes configuration and functions
 require("config.php");
 require("functions.php");
@@ -59,11 +64,21 @@ else {
    $menu = getmenu($websitedatadir, $websiteindex);
 }
 
-   
-// Get the name of the page
+// Get the name of the page.
 $pagename = getpagename($page);
 
+// Get the extras.
+$extras = getextra($page, $websitedatadir);
+$bodyextra = $extras[0];
+$pagetheme = $extras[1];
+$headextra = $extras[2];
+
 // Finally, include the theme.
-include($websitethemedir . $websitetheme);
+if ($pagetheme == "") {
+	include($websitethemedir . $websitetheme);
+}
+else {
+	include($websitethemedir . $pagetheme);
+}
 
 ?>
