@@ -3,7 +3,7 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: htmlpreview.js
 Description: The JavaScript that controls the live HTML preview in createpage and editpage.
 

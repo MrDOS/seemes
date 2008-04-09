@@ -5,14 +5,14 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: .txt
 Description: Admin Control Panel action module; log the admin user out.
 
 */
 
 ?>
-<h2>Logging out...</h2>
+<?php echo($websiteheaderpretext); ?>Logging out...<?php echo($websiteheaderposttext); ?>
 <?php
 
 session_destroy();

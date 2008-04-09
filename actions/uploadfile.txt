@@ -5,17 +5,17 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: upload.txt
 Description: Admin Control Panel action module; upload a file.
 
 */
 
 ?>
-<h2>Uploading file...</h2>
+<?php echo($websiteheaderpretext); ?>Uploading file...<?php echo($websiteheaderposttext); ?>
 <?php
 
-$uploadpath = $websiteuploaddir . basename($_FILES["filename"]["name"]);
+$uploadpath = $uploaddir . basename($_FILES["filename"]["name"]);
 if (move_uploaded_file($_FILES["filename"]["tmp_name"], $uploadpath)) {
 	if (chmod($uploadpath, 0666)) {
 		echo("The file " . basename($_FILES["filename"]["name"]) . " has been uploaded successfully.");

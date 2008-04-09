@@ -5,7 +5,7 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: admin.php
 Description: Administrator index file.
 
@@ -38,6 +38,7 @@ if (isset($_SESSION["seemeslogin"]) && $_SESSION["seemeslogin"] == $websitepassw
    // Check if $page is blank. If so, use the default page.
    if ($page == "") {
       $page = $websitedefaultpage;
+   	$requestedpage = $page;
    }
    
    // Now get the page path

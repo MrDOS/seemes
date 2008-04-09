@@ -5,14 +5,14 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: changesettings.txt
 Description: Admin Control Panel action module; change Seemes' settings.
 
 */
 
 ?>
-<h2>Changing settings...</h2>
+<?php echo($websiteheaderpretext); ?>Changing settings...<?php echo($websiteheaderposttext); ?>
 <?php
 
 // Get POSTed values...
@@ -73,14 +73,17 @@ This software is released under the GPL licence. Please see gpl.txt.
 \$websitedataextension = \"" . $websitedataextension . "\"; // File extension for the data files. Period needed.
 \$websitedefaultpage = \"" . $websitedefaultpage . "\"; // The filename of the default page. No extension.
 \$websiteerrorpage = \"" . $websiteerrorpage . "\"; // The default error page (404).
-\$websiteheadersize = \"" . $websiteheadersize . "\"; // Size of page title headers.
+\$websiteheaderpretext = \"" . addslashes($websiteheaderpretext) . "\"; // Pre-page header HTML.
+\$websiteheaderposttext = \"" . addslashes($websiteheaderposttext) . "\"; // Post-page header HTML.
 \$websiteimagedir = \"" . $websiteimagedir . "\"; // The image folder. MUST HAVE LEADING SLASH!
 \$websiteindex = \"" . $websiteindex . "\"; // The main PHP file.
+\$websitemenucurrentitem = \"" . addslashes($websitemenucurrentitem) . "\"; // What %menucurrentitem% is replaced with.
 \$websitemenuformatting = \"" . addslashes($websitemenuformatting) . "\"; // The formatting for menu items. This is explained further in docs/advancedusage.htm.
+\$websitemenuindent = \"" . $websitemenuindent . "\"; // What to use as indentation/marking on menu subitems.
 \$websitename = \"" . $websitename . "\"; // The name of the site.
 \$websitepassword = \"" . $websitepassword . "\"; // The admin password, SHA-1 encrypted.
 \$websiteuploaddir = \"" . $websiteuploaddir . "\"; // The folder for uploads. MUST HAVE LEADING SLASH!
-\$websitetheme = \"" . $websitetheme . "\"; // The php file for the the template you want to use.
+\$websitetheme = \"" . $websitetheme . "\"; // The directory name for the the theme you want to use.
 \$websitethemedir = \"" . $websitethemedir . "\"; // The theme directory.
 
 ?>");

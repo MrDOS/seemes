@@ -5,14 +5,14 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: createpage.txt
 Description: Admin Control Panel action module; creates a new page.
 
 */
 
 ?>
-<h2>Creating page...</h2>
+<?php echo($websiteheaderpretext); ?>Creating page...<?php echo($websiteheaderposttext); ?>
 <?php
 
 // Get some POSTed variables.
@@ -32,7 +32,7 @@ if ($pagefilename != "") {
    if (!file_exists($pagefilepath)) {
       // If it doesn't, write.
       $file = fopen($pagefilepath, "w");
-      fwrite($file, "<h" . $websiteheadersize . ">" . $pagename . "</h" . $websiteheadersize . ">\n");
+      fwrite($file, "<?php echo(\$websiteheaderpretext); ?>" . $pagename . "<?php echo(\$websiteheaderposttext); ?>\n");
       fwrite($file, $content . "\n");
       fclose($file);
       $wrote = true;

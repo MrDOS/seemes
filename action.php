@@ -5,7 +5,7 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: action.php
 Description: Actionator-thingie.
 
@@ -59,17 +59,47 @@ if ($_SESSION["seemeslogin"] == $websitepassword) {
 	elseif ($action == "uploadfile") {
 		$page = $websiteactiondir . "uploadfile" . $websitedataextension;
 		$pagename = "Uploading file...";
-		$action = "file";
+		
+		$uploaddir = $_POST["uploaddir"];
+		if ($uploaddir != $websiteuploaddir && $uploaddir != $websiteimagedir) {
+			$uploaddir = $websiteuploaddir;
+		}
+		if ($uploaddir == $websiteimagedir) {
+			$action = "image";
+		}
+		else {
+			$action = "file";
+		}
 	}
 	elseif ($action == "deletefile") {
 		$page = $websiteactiondir . "deletefile" . $websitedataextension;
 		$pagename = "Deleting file...";
-		$action = "file";
+		
+		$deletedir = $_POST["deletedir"];
+		if ($deletedir != $websiteuploaddir && $deletedir != $websiteimagedir) {
+			$deletedir = $websiteuploaddir;
+		}
+		if ($deletedir == $websiteimagedir) {
+			$action = "image";
+		}
+		else {
+			$action = "file";
+		}
 	}
 	elseif ($action == "movefile") {
 		$page = $websiteactiondir . "movefile" . $websitedataextension;
 		$pagename = "Moving file...";
-		$action = "file";
+		
+		$movedir = $_POST["movedir"];
+		if ($movedir != $websiteuploaddir && $movedir != $websiteimagedir) {
+			$movedir = $websiteuploaddir;
+		}
+		if ($movedir == $websiteimagedir) {
+			$action = "image";
+		}
+		else {
+			$action = "file";
+		}
 	}
 	elseif ($action == "edittheme") {
 		$page = $websiteactiondir . "edittheme" . $websitedataextension;

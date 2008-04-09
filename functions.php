@@ -5,7 +5,7 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: functions.php
 Description: Global functions. See each function for a description.
 
@@ -47,7 +47,7 @@ function getmenu($datadir, $phpfile) {
 	// Get the website menu.
 	
 	// Get some necessary variables out of config.php.
-	global $websitemenuformatting, $requestedpage;
+	global $websitemenucurrentitem, $websitemenuformatting, $websitemenuindent, $requestedpage;
 	
 	// First, make sure that the menu variable is blank.
 	$menu = "";
@@ -90,7 +90,7 @@ function getmenu($datadir, $phpfile) {
 				
 				// If the counter is greater than 0, we want to display a bullet first.
 				if ($i > 0) {
-					$currentitemname[$i] = "&bull;&nbsp;";
+					$currentitemname[$i] = $websitemenuindent;
 				}
 				
 				// This if only lets us past if the counter is less than 1 or if we're allowed to show sub-items.
@@ -134,6 +134,7 @@ function getmenu($datadir, $phpfile) {
 						// Oh goodie! However, we do have to check to see whether we're dealing with page-specific menu items or not, too...
 						
 						// Do the first item.
+						$currentitemsimplename[$i] = $currentitem[$i];
 						$currentitempath = getpage($currentitem[$i], $datadir);
 						$currentitemname[$i] = $currentitemname[$i] . getpagename($currentitempath);
 						$currentitemhref[$i] = $phpfile . ".php?page=" . $currentitem[$i];
@@ -155,6 +156,12 @@ function getmenu($datadir, $phpfile) {
 					$currentitemfinal = str_replace("%menuid%", $currentitemid[$i], $currentitemfinal);
 					$currentitemfinal = str_replace("%menuname%", $currentitemname[$i], $currentitemfinal);
 					$currentitemfinal = str_replace("%menunumber%", $menuitems, $currentitemfinal);
+					if ($currentitemsimplename[$i] == $requestedpage) {
+						$currentitemfinal = str_replace("%menucurrentitem%", $websitemenucurrentitem, $currentitemfinal);
+					}
+					else {
+						$currentitemfinal = str_replace("%menucurrentitem%", "", $currentitemfinal);
+					}
 					
 					$menu = $menu . $currentitemfinal;
 				}

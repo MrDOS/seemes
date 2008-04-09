@@ -5,7 +5,7 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: index.php
 Description: Seemes CMS installation; redirect to first installation step.
 

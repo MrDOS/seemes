@@ -1,4 +1,4 @@
-<h2>Log out</h2>
+<?php echo($websiteheaderpretext); ?>Log out<?php echo($websiteheaderposttext); ?>
 <?php
 
 /*
@@ -6,7 +6,7 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: logout.txt
 Description: Admin Control Panel module; logs the user out.
 

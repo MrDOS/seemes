@@ -5,7 +5,7 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: install3.php
 Description: Seemes CMS installation; stage #3: write files.
 
@@ -19,13 +19,13 @@ if (file_exists("../config.php")) {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>Seemes CMS - Installation</title>
+<title>Seemes CMS 0.4 - Installation</title>
 <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
 <div id="main">
-<h1>Seemes CMS - Installation</h1>
+<h1>Seemes CMS 0.4 - Installation</h1>
 <div class="stepbox"><em>Step 1</em><br />Permissions Check</div>
 <div class="stepbox"><em>Step 2</em><br />Gather information</div>
 <div class="stepbox currentstep"><em>Step 3</em><br />Writing files</div>
@@ -34,8 +34,8 @@ if (file_exists("../config.php")) {
 <?php
 
 $gplagree = $_POST["gplagree"];
-$websitename = trim(stripslashes($_POST["websitename"]));
-$websitecopyright = trim(stripslashes($_POST["websitecopyright"]));
+$websitename = trim(str_replace("\"", "\\\"", stripslashes($_POST["websitename"])));
+$websitecopyright = trim(str_replace("\"", "\\\"", stripslashes($_POST["websitecopyright"])));
 $websitetheme = trim(stripslashes($_POST["websitetheme"]));
 $websitepassword = $_POST["websitepassword"];
 $websitepasswordverify = $_POST["websitepasswordverify"];
@@ -77,13 +77,13 @@ else {
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 MagicWare
 Filename: config.php
 Description: Seemes configuration file.
 
 */
 
-\$seemesversion = \"0.4 Beta 1\"; // Seemes version number
+\$seemesversion = \"0.4\"; // Seemes version number
 \$websiteactiondir = \"actions/\"; // The actions data folder. MUST HAVE LEADING SLASH!
 \$websiteadmindir = \"admin/\"; // The admin data folder. MUST HAVE LEADING SLASH!
 \$websiteadminindex = \"admin\"; // The main admin PHP file.
@@ -92,10 +92,13 @@ Description: Seemes configuration file.
 \$websitedataextension = \".txt\"; // File extension for the data files. Period needed.
 \$websitedefaultpage = \"home\"; // The filename of the default page. No extension.
 \$websiteerrorpage = \"error.inc\"; // The default error page (404).
-\$websiteheadersize = \"2\"; // Size of page title headers.
+\$websiteheaderpretext = \"<h2>\"; // Pre-page header HTML.
+\$websiteheaderposttext = \"</h2>\\n\"; // Post-page header HTML.
 \$websiteimagedir = \"img/\"; // The image folder. MUST HAVE LEADING SLASH!
 \$websiteindex = \"index\"; // The main PHP file.
-\$websitemenuformatting = \"<li><a href=\\\"%menuhref%\\\" id=\\\"menu%menuid%\\\">%menuname%</a></li>\\n\"; // The formatting for menu items. This is explained further in docs/advancedusage.htm.
+\$websitemenucurrentitem = \" class=\\\"currentitem\\\"\";
+\$websitemenuformatting = \"<li><a href=\\\"%menuhref%\\\" id=\\\"menu%menuid%\\\"%menucurrentitem%>%menuname%</a></li>\\n\"; // The formatting for menu items. This is explained further in docs/advancedusage.htm.
+\$websitemenuindent = \"&bull;&nbsp;\";
 \$websitename = \"" . $websitename . "\"; // The name of the site.
 \$websitepassword = \"" . $websitepassword . "\"; // The admin password, SHA-1 encrypted.
 \$websiteuploaddir = \"files/\"; // The folder for uploads. MUST HAVE LEADING SLASH!

@@ -1,4 +1,4 @@
-<h2>File manager</h2>
+<?php echo($websiteheaderpretext); ?>File manager<?php echo($websiteheaderposttext); ?>
 <?php
 
 /*
@@ -6,7 +6,7 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: fileimage.txt
 Description: Admin Control Panel module; file manager.
 
@@ -35,7 +35,7 @@ else {
 <form action="action.php" enctype="multipart/form-data" method="post">
 <fieldset>
 <input type="hidden" name="action" value="uploadfile" />
-<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+<input type="hidden" name="MAX_FILE_SIZE" value="100000000" />
 <label for="uploadfilename">File to upload:</label><br />
 <input type="file" name="filename" id="uploadfilename" /><br />
 <input type="submit" value="Upload file" />

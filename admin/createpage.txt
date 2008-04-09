@@ -1,4 +1,4 @@
-<h2>Create page</h2>
+<?php echo($websiteheaderpretext); ?>Create page<?php echo($websiteheaderposttext); ?>
 <?php
 
 /*
@@ -6,7 +6,7 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: createpage.txt
 Description: Admin Control Panel module; create a new page.
 
@@ -25,6 +25,12 @@ Description: Admin Control Panel module; create a new page.
 <input type="text" name="pagefilename" id="pagefilename" style="width: 400px;" /><br />
 <label for="pagename">Page name:</label><br />
 <input type="text" name="pagename" id="pagename" style="width: 400px;" /><br />
+<fieldset>
+<legend>Quick Add</legend>
+<label for="quickpage">Page:</label>
+<?php listpages($websitedatadir, "", true, true, "quickpage"); ?>
+<input type="button" id="quicklinkadd" value="Add" onclick="javascript: addLink('content', 'quickpage');" />
+</fieldset>
 <label for="content">Content:</label><br />
 <textarea name="content" id="content" cols="80" rows="25" onkeyup="showPreview('content', 'htmlpreview')"></textarea><br />
 Live preview:<br />
@@ -59,3 +65,10 @@ echo("</select><br />\n");
 <input type="submit" value="Create page" />
 </fieldset>
 </form>
+<script type="text/javascript">
+<!--
+
+var websiteindex = '<?php echo($websiteindex); ?>.php';
+
+-->
+</script>

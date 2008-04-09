@@ -5,7 +5,7 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: index.php
 Description: Index file.
 
@@ -33,6 +33,7 @@ $requestedpage = $page;
 // Check if $page is blank. If it is, use the default page.
 if ($page == "") {
    $page = $websitedefaultpage;
+   $requestedpage = $page;
 }
 
 // Now get the page path.

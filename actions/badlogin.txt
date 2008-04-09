@@ -5,13 +5,13 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: badlogin.txt
 Description: Bad login attempt.
 
 */
 
 ?>
-<h2>Bad login</h2>
+<?php echo($websiteheaderpretext); ?>Bad login<?php echo($websiteheaderposttext); ?>
 <p>You have not been logged in.</p>
 <p>(You will be redirected to the login page automatically. Click <a href="<?php echo($websiteadminindex . ".php"); ?>">here</a> if you don't want to wait.)</p>

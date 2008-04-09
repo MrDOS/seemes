@@ -5,14 +5,14 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: movefile.txt
 Description: Admin Control Panel action module; move a file.
 
 */
 
 ?>
-<h2>Moving file...</h2>
+<?php echo($websiteheaderpretext); ?>Moving file...<?php echo($websiteheaderposttext); ?>
 <?php
 
 // Get some POSTed variables.
@@ -20,8 +20,8 @@ $currentfilename = trim($_POST["currentfilename"]);
 $newfilename = trim($_POST["newfilename"]);
 
 if ($currentfilename != "" && $newfilename != "") {
-	$currentfilepath = $websiteuploaddir . $currentfilename;
-	$newfilepath = $websiteuploaddir . $newfilename;
+	$currentfilepath = $movedir . $currentfilename;
+	$newfilepath = $movedir . $newfilename;
 	if (file_exists($currentfilepath) && !file_exists($newfilepath)) {
 		$moved = rename($currentfilepath, $newfilepath);
 		if ($moved) {

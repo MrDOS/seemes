@@ -1,4 +1,4 @@
-<h2>Edit page</h2>
+<?php echo($websiteheaderpretext); ?>Edit page<?php echo($websiteheaderposttext); ?>
 <?php
 
 /*
@@ -6,16 +6,17 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: editpage.txt
 Description: Admin Control Panel module; edit a page.
 
 */
 
 ?>
-<form action="admin.php?page=editpage" method="post">
+<form action="admin.php?page=editpage" method="get">
 <fieldset>
 <label for="pagefilename">Page filename:</label><br />
+<input type="hidden" name="page" value="editpage" />
 <?php listpages($websitedatadir, "", true, true, "pagefilename"); ?><br />
 <input type="submit" value="Open page" />
 </fieldset>
@@ -23,7 +24,7 @@ Description: Admin Control Panel module; edit a page.
 <?php
 
 // Get the POSTed filename (if any).
-$pagefilename = trim($_POST["pagefilename"]);
+$pagefilename = trim($_GET["pagefilename"]);
 
 // If a page filename has been POSTed, open it for editing.
 if ($pagefilename != "") {
@@ -60,38 +61,51 @@ if ($pagefilename != "") {
 			$pagetheme = "<code>" . $pagetheme . "</code>";
 		}
 		
-		echo("<form action=\"action.php\" method=\"post\">\n");
-		echo("<fieldset>\n");
-		echo("<legend>Page stuff</legend>\n");
-		echo("<input type=\"hidden\" name=\"action\" value=\"editpage\" />\n");
-		echo("<input type=\"hidden\" name=\"pagefilename\" value=\"" . $pagefilename . "\" />\n");
-		echo("<label for=\"pagename\">Page name:</label><br />\n");
-		echo("<input type=\"text\" name=\"pagename\" id=\"pagename\" style=\"width: 400px;\" value=\"" . $pagename . "\" /><br />\n");
-		echo("<label for=\"content\">Content:</label><br />\n");
-		echo("<textarea name=\"content\" id=\"content\" cols=\"80\" rows=\"25\" onkeyup=\"showPreview('content', 'htmlpreview')\">" . $content . "</textarea><br />\n");
-		echo("Live preview:<br />");
-		echo("<div id=\"htmlpreview\" style=\"border: 1px solid #d0d0d0; background-color: #ffffff; color: #000000;\"><p style=\"color: #c0c0c0;\">Your live preview will appear here, if you have JavaScript enabled.</p></div>");
-		echo("</fieldset>");
-		echo("<fieldset>");
-		echo("<legend>Extra stuff</legend>\n");
-		echo("<label for=\"headextra\">Extra header (optional):</label><br />\n");
-		echo("<textarea name=\"headextra\" id=\"headextra\" cols=\"80\" rows=\"5\">" . $headextra . "</textarea><br />\n");
-		echo("<label for=\"bodyextra\">Extra <code>&lt;body&gt;</code> tag content (<code>onload</code>, etc.) (optional):</label><br />\n");
-		echo("<input type=\"text\" name=\"bodyextra\" id=\"bodyextra\" style=\"width: 400px;\" value=\"" . $bodyextra . "\" /><br />\n");
+		echo("<form action=\"action.php\" method=\"post\">
+<fieldset>
+<legend>Page stuff</legend>
+<input type=\"hidden\" name=\"action\" value=\"editpage\" />
+<input type=\"hidden\" name=\"pagefilename\" value=\"" . $pagefilename . "\" />
+<label for=\"pagename\">Page name:</label><br />
+<input type=\"text\" name=\"pagename\" id=\"pagename\" style=\"width: 400px;\" value=\"" . $pagename . "\" /><br />
+<fieldset>
+<legend>Quick Add</legend>
+<label for=\"quickpage\">Page:</label> ");
+		listpages($websitedatadir, "", true, true, "quickpage");
+		echo(" <input type=\"button\" id=\"quicklinkadd\" value=\"Add\" onclick=\"javascript: addLink('content', 'quickpage');\" />
+</fieldset>
+<label for=\"content\">Content:</label><br />
+<textarea name=\"content\" id=\"content\" cols=\"80\" rows=\"25\" onkeyup=\"showPreview('content', 'htmlpreview')\">" . $content . "</textarea><br />
+Live preview:<br />
+<div id=\"htmlpreview\" style=\"border: 1px solid #d0d0d0; background-color: #ffffff; color: #000000;\"><p style=\"color: #c0c0c0;\">Your live preview will appear here, if you have JavaScript enabled.</p></div>
+</fieldset>
+<fieldset>
+<legend>Extra stuff</legend>
+<label for=\"headextra\">Extra header (optional):</label><br />
+<textarea name=\"headextra\" id=\"headextra\" cols=\"80\" rows=\"5\">" . $headextra . "</textarea><br />
+<label for=\"bodyextra\">Extra <code>&lt;body&gt;</code> tag content (<code>onload</code>, etc.) (optional):</label><br />
+<input type=\"text\" name=\"bodyextra\" id=\"bodyextra\" style=\"width: 400px;\" value=\"" . $bodyextra . "\" /><br />");
 		$themefiles = listfiles($websitethemedir, true, "index.htm", false, false, "");
-		echo("<label for=\"pagetheme\">Page theme (currently " . $pagetheme . "):</label><br />");
-		echo("<select name=\"pagetheme\" id=\"pagetheme\">\n");
-		echo("<option value=\"\" selected=\"selected\">(Website default)</option>\n");
+		echo("<label for=\"pagetheme\">Page theme (currently " . $pagetheme . "):</label><br />
+<select name=\"pagetheme\" id=\"pagetheme\">
+<option value=\"\" selected=\"selected\">(Website default)</option>");
 		foreach ($themefiles as $filename) {
-			echo("<option value=\"" . $filename . "\">" . $filename . "</option>\n");
+			echo("<option value=\"" . $filename . "\">" . $filename . "</option>");
 		}
-		echo("</select><br />\n");
-		echo("</fieldset>");
-		echo("<fieldset>");
-		echo("<input type=\"submit\" value=\"Edit page\" />\n");
-		echo("</fieldset>");
-		echo("</form>");
+		echo("</select><br />
+</fieldset>
+<fieldset>
+<input type=\"submit\" value=\"Edit page\" />
+</fieldset>
+</form>\n");
 	}
 }
 
 ?>
+<script type="text/javascript">
+<!--
+
+var websiteindex = '<?php echo($websiteindex); ?>.php';
+
+-->
+</script>

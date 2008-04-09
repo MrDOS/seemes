@@ -5,6 +5,7 @@ editpage
 movepage
 editmenu
 file
+image
 edittheme
 changesettings
 logout

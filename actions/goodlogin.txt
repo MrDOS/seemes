@@ -5,13 +5,13 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: goodlogin.txt
 Description: Good login attempt.
 
 */
 
 ?>
-<h2>You have been logged in</h2>
+<?php echo($websiteheaderpretext); ?>You have been logged in<?php echo($websiteheaderposttext); ?>
 <p>You have now been logged in.</p>
 <p>(You will be redirected to the Admin Control Panel automatically. Click <a href="<?php echo($websiteadminindex . ".php"); ?>">here</a> if you don't want to wait.)</p>

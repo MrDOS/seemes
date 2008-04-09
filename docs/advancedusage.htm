@@ -6,18 +6,18 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: basicusage.htm
 Description: Seemes CMS documentation; basic usage of Seemes.
 
 -->
-<title>Seemes CMS 0.4 Beta 1 - Documentation - Advanced Usage</title>
+<title>Seemes CMS 0.4 - Documentation - Advanced Usage</title>
 <link rel="stylesheet" href="style.css" type="text/css" />
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 </head>
 <body>
 <div id="main">
-<h1>Seemes CMS 0.4 Beta 1 - Documentation</h1>
+<h1>Seemes CMS 0.4 - Documentation</h1>
 <div class="docbox"><a href="readme.htm">Readme</a></div>
 <div class="docbox"><a href="whatsnew.htm">What's New</a></div>
 <div class="docbox"><a href="install.htm">Installation</a></div>
@@ -29,10 +29,10 @@ Description: Seemes CMS documentation; basic usage of Seemes.
 <br style="clear: both;" />
 <h2>Advanced Usage</h2>
 <hr />
-<h4>Introduction</h4>
+<h3>Introduction</h3>
 <p>This file touches on one of the more advanced sides of Seemes; namely, customization of the <code>config.php</code> file.</p>
 <hr />
-<h4>Just for Starters</h4>
+<h3>Just for Starters</h3>
 <p>For your reference throughout the rest of this guide, here is a sample <code>config.php</code> file.</p>
 <pre>&lt;?php
 
@@ -59,7 +59,9 @@ $websiteerrorpage = "error.inc"; // The default error page (404).
 $websiteheadersize = "2"; // Size of page title headers.
 $websiteimagedir = "img/"; // The image folder. MUST HAVE LEADING SLASH!
 $websiteindex = "index"; // The main PHP file.
-$websitemenuformatting = "&lt;li&gt;&lt;a href=\"%menuhref%\" id=\"menu%menuid%\"&gt;%menuname%&lt;/a&gt;&lt;/li&gt;\n"; // The formatting for menu items. This is explained further in docs/advancedusage.htm.
+$websitemenucurrentitem = " class=\"currentitem\"";
+$websitemenuformatting = "&lt;li&gt;&lt;a href=\"%menuhref%\" id=\"menu%menuid%\"%menucurrentitem%&gt;%menuname%&lt;/a&gt;&lt;/li&gt;\n"; // The formatting for menu items. This is explained further in docs/advancedusage.htm.
+$websitemenuindent = "&amp;bull;&amp;nbsp;";
 $websitename = "Seemes Site"; // The name of the site.
 $websitepassword = "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8"; // The admin password, SHA-1 encrypted.
 $websiteuploaddir = "files/"; // The folder for uploads. MUST HAVE LEADING SLASH!
@@ -69,17 +71,18 @@ $websitethemedir = "themes/"; // The theme directory.
 ?&gt;</pre>
 <p>Pretty much everything should be self-explanatory.</p>
 <hr />
-<h4>Changing the Menu Formatting</h4>
+<h3>Changing the Menu Formatting</h3>
 <p>To change the way menu items are formatted, you can alter the variable <code>$websitemenuformatting</code>. As you can see by looking at the example, it's basically just an escaped copy of the HTML string you want as a result, with a few strings in it that are automatically replaced with the item-specific information.</p>
 <h5>Replacements</h5>
 <ul>
+<li><code>%menucurrentitem%</code> becomes the contents of <code>$websitemenucurrentitem</code> if that menu item is for the current page.</li>
 <li><code>%menuhref%</code> becomes the URL of the link.</li>
 <li><code>%menuid%</code> becomes the ID of the menu item. In the case of normal page links, this is the filename of the page without the extension.</li>
 <li><code>%menuname%</code> becomes the name of the menu item.</li>
 <li><code>%menunumber%</code> becomes the number of the menu item (with the count starting at 1).</li>
 </ul>
 <hr />
-<p id="footer"><strong>Seemes CMS</strong> is &copy;2007 MagicWare, and is released under the GNU General Public Licence 2.</p>
+<p id="footer"><strong>Seemes CMS</strong> is &copy;2006 - 2008 Samuel Coleman, and is released under the GNU General Public Licence 2.</p>
 </div>
 </body>
 </html>

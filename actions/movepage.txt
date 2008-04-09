@@ -5,14 +5,14 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: movepage.txt
 Description: Admin Control Panel action module; move a page.
 
 */
 
 ?>
-<h2>Moving page...</h2>
+<?php echo($websiteheaderpretext); ?>Moving page...<?php echo($websiteheaderposttext); ?>
 <?php
 
 // Get some POSTed variables.

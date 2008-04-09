@@ -1,4 +1,4 @@
-<h2>Edit theme</h2>
+<?php echo($websiteheaderpretext); ?>Edit theme<?php echo($websiteheaderposttext); ?>
 <?php
 
 /*
@@ -6,7 +6,7 @@
 Please see gpl.txt for licence and disclaimer of warranty.
 
 Seemes CMS
-Copyright 2007 MagicWare
+Copyright 2007, 2008 Samuel C
 Filename: edittheme.txt
 Description: Admin Control Panel module; edit a theme file.
 
